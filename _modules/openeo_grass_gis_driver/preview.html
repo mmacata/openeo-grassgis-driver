@@ -1,0 +1,190 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>openeo_grass_gis_driver.preview &#8212; openeo_grass_gis_driver  documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for openeo_grass_gis_driver.preview</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">make_response</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">openeo_grass_gis_driver.actinia_processing.base</span> <span class="k">import</span> <span class="n">analyse_process_graph</span>
+<span class="kn">from</span> <span class="nn">openeo_grass_gis_driver.process_graph_db</span> <span class="k">import</span> <span class="n">GraphDB</span>
+<span class="kn">from</span> <span class="nn">openeo_grass_gis_driver.actinia_processing.actinia_interface</span> <span class="k">import</span> <span class="n">ActiniaInterface</span>
+<span class="kn">from</span> <span class="nn">openeo_grass_gis_driver.error_schemas</span> <span class="k">import</span> <span class="n">ErrorSchema</span>
+<span class="kn">from</span> <span class="nn">openeo_grass_gis_driver.authentication</span> <span class="k">import</span> <span class="n">ResourceBase</span>
+
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;Apache License, Version 2.0&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Sören Gebbert&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2018, Sören Gebbert, mundialis&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Soeren Gebbert&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;soerengebbert@googlemail.com&quot;</span>
+
+
+<div class="viewcode-block" id="Preview"><a class="viewcode-back" href="../../api/openeo_grass_gis_driver.html#openeo_grass_gis_driver.preview.Preview">[docs]</a><span class="k">class</span> <span class="nc">Preview</span><span class="p">(</span><span class="n">ResourceBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iface</span> <span class="o">=</span> <span class="n">ActiniaInterface</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">set_auth</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">authorization</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">authorization</span><span class="o">.</span><span class="n">password</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">GraphDB</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Preview.post"><a class="viewcode-back" href="../../api/openeo_grass_gis_driver.html#openeo_grass_gis_driver.preview.Preview.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the job in an ephemeral mapset synchronously for 10 seconds. After 10 seconds the running job</span>
+<span class="sd">        will be killed on the actinia server and the response will be an termination report.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Empty the process location</span>
+            <span class="n">ActiniaInterface</span><span class="o">.</span><span class="n">PROCESS_LOCATION</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">request_doc</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+            <span class="n">process_graph</span> <span class="o">=</span> <span class="n">request_doc</span><span class="p">[</span><span class="s2">&quot;process_graph&quot;</span><span class="p">]</span>
+            <span class="c1"># Transform the process graph into a process chain and store the input location</span>
+            <span class="c1"># Check all locations in the process graph</span>
+            <span class="n">result_name</span><span class="p">,</span> <span class="n">process_list</span> <span class="o">=</span> <span class="n">analyse_process_graph</span><span class="p">(</span><span class="n">process_graph</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ActiniaInterface</span><span class="o">.</span><span class="n">PROCESS_LOCATION</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">ActiniaInterface</span><span class="o">.</span><span class="n">PROCESS_LOCATION</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="s2">&quot;Processes can only be defined for a single location!&quot;</span><span class="p">},</span>
+                                             <span class="mi">400</span><span class="p">))</span>
+
+            <span class="n">location</span> <span class="o">=</span> <span class="n">ActiniaInterface</span><span class="o">.</span><span class="n">PROCESS_LOCATION</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="n">location</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">location</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">process_chain</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="o">=</span><span class="n">process_list</span><span class="p">,</span>
+                                 <span class="n">version</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+
+            <span class="c1"># pprint.pprint(process_chain)</span>
+
+            <span class="n">status</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">async_ephemeral_processing_export</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">,</span>
+                                                                            <span class="n">process_chain</span><span class="o">=</span><span class="n">process_chain</span><span class="p">)</span>
+            <span class="n">status</span><span class="p">,</span> <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wait_until_finished</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">max_time</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;job_id&quot;</span><span class="p">:</span><span class="n">response</span><span class="p">[</span><span class="s2">&quot;resource_id&quot;</span><span class="p">],</span>
+                                              <span class="s2">&quot;job_info&quot;</span><span class="p">:</span><span class="n">response</span><span class="p">}),</span> <span class="n">status</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">error</span> <span class="o">=</span> <span class="n">ErrorSchema</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;1234567890&quot;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="n">links</span><span class="o">=</span><span class="n">response</span><span class="p">[</span><span class="s2">&quot;urls&quot;</span><span class="p">][</span><span class="s2">&quot;status&quot;</span><span class="p">])</span>
+                <span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span> <span class="n">status</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+
+            <span class="n">e_type</span><span class="p">,</span> <span class="n">e_value</span><span class="p">,</span> <span class="n">e_tb</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
+            <span class="n">traceback_model</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e_value</span><span class="p">),</span>
+                                   <span class="n">traceback</span><span class="o">=</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_tb</span><span class="p">(</span><span class="n">e_tb</span><span class="p">),</span>
+                                   <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e_type</span><span class="p">))</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="n">ErrorSchema</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;1234567890&quot;</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">traceback_model</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">to_json</span><span class="p">(),</span> <span class="mi">400</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Preview.wait_until_finished"><a class="viewcode-back" href="../../api/openeo_grass_gis_driver.html#openeo_grass_gis_driver.preview.Preview.wait_until_finished">[docs]</a>    <span class="k">def</span> <span class="nf">wait_until_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">max_time</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Poll the status of a resource and assert its finished HTTP status</span>
+
+<span class="sd">        The response will be checked if the resource was accepted. Hence it must always be HTTP 200 status.</span>
+
+<span class="sd">        The status URL from the response is then polled until status: finished, error or terminated.</span>
+<span class="sd">        The result of the poll can be checked against its HTTP status and its GRaaS status message.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            response: The accept response</span>
+<span class="sd">            max_time (int): The maximum time to wait, until the job gets killed</span>
+
+<span class="sd">        Returns: response</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check if the resource was accepted</span>
+
+        <span class="n">resource_id</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;resource_id&quot;</span><span class="p">]</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">status</span><span class="p">,</span> <span class="n">resp_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">resource_info</span><span class="p">(</span><span class="n">resource_id</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resp_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">or</span> <span class="s2">&quot;status&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">resp_data</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;wrong return values </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">resp_data</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">resp_data</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;finished&quot;</span> <span class="ow">or</span> \
+                    <span class="n">resp_data</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;error&quot;</span> <span class="ow">or</span> \
+                    <span class="n">resp_data</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;terminated&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">current_time</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&gt;</span> <span class="n">max_time</span><span class="p">:</span>
+                <span class="n">status_code</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iface</span><span class="o">.</span><span class="n">delete_resource</span><span class="p">(</span><span class="n">resource_id</span><span class="o">=</span><span class="n">resource_id</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Unable to terminate job, error: </span><span class="si">{data}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">status</span><span class="p">,</span> <span class="n">resp_data</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Soeren Gebbert.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

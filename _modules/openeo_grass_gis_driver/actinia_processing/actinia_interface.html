@@ -1,0 +1,365 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>openeo_grass_gis_driver.actinia_processing.actinia_interface &#8212; openeo_grass_gis_driver  documentation</title>
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for openeo_grass_gis_driver.actinia_processing.actinia_interface</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">openeo_grass_gis_driver.actinia_processing.config</span> <span class="k">import</span> <span class="n">Config</span> <span class="k">as</span> <span class="n">ActiniaConfig</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;Apache License, Version 2.0&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Sören Gebbert&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2018, Sören Gebbert, mundialis&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Soeren Gebbert&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;soerengebbert@googlemail.com&quot;</span>
+
+
+<div class="viewcode-block" id="ActiniaInterface"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface">[docs]</a><span class="k">class</span> <span class="nc">ActiniaInterface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is the interface class to the actinia REST service that uses GRASS GIS as backend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">PROCESS_LOCATION</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">ActiniaConfig</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">ActiniaConfig</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">HOST</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">PORT</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(host)s</span><span class="s2">:</span><span class="si">%(port)s</span><span class="s2">/latest&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">}</span>
+
+<div class="viewcode-block" id="ActiniaInterface.set_auth"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.set_auth">[docs]</a>    <span class="k">def</span> <span class="nf">set_auth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.layer_def_to_components"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.layer_def_to_components">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">layer_def_to_components</span><span class="p">(</span><span class="n">layer</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Convert the name of a layer in the openeo framework into GRASS GIS definitions</span>
+
+<span class="sd">        location.mapset.datatype.map_name -&gt; (location, mapset, datatype, layer)</span>
+
+<span class="sd">        Return (None, None, None, map_name) if no location/mapset information was found</span>
+
+<span class="sd">        :param layer: The name of the map_name in the form location.mapset.map_name</span>
+<span class="sd">        :return: (location, mapset, datatype, map_name) or (None, None, None, map_name)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">layer</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">layer</span>
+
+        <span class="n">location</span><span class="p">,</span> <span class="n">mapset</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">map_name</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="c1"># Store the location in the global location dict</span>
+        <span class="n">ActiniaInterface</span><span class="o">.</span><span class="n">PROCESS_LOCATION</span><span class="p">[</span><span class="n">location</span><span class="p">]</span> <span class="o">=</span> <span class="n">location</span>
+
+        <span class="k">return</span> <span class="n">location</span><span class="p">,</span> <span class="n">mapset</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">map_name</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.layer_def_to_grass_map_name"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.layer_def_to_grass_map_name">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">layer_def_to_grass_map_name</span><span class="p">(</span><span class="n">layer</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Convert the name of a layer in the openeo framework into GRASS GIS map name with optional mapset</span>
+
+<span class="sd">        location.mapset.datatype.map_name -&gt; map_name@mapset</span>
+
+<span class="sd">        Return layer if no location/mapset information was found</span>
+
+<span class="sd">        :param layer: The name of the layer in the form location.mapset.datatype.map_name</span>
+<span class="sd">        :return: map_name@mapset or map_name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">location</span><span class="p">,</span> <span class="n">mapset</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">layer_name</span> <span class="o">=</span> <span class="n">ActiniaInterface</span><span class="o">.</span><span class="n">layer_def_to_components</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mapset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">layer_name</span> <span class="o">=</span> <span class="n">layer_name</span> <span class="o">+</span> <span class="s2">&quot;@&quot;</span> <span class="o">+</span> <span class="n">mapset</span>
+
+        <span class="k">return</span> <span class="n">layer_name</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.check_health"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.check_health">[docs]</a>    <span class="k">def</span> <span class="nf">check_health</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s2">&quot;/health_check&quot;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+    <span class="k">def</span> <span class="nf">_send_get_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;process_results&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">_send_post_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">process_chain</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Send a post request and return the return status and the Actinia response</span>
+
+<span class="sd">        :param url:</span>
+<span class="sd">        :param process_chain:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">,</span>
+                          <span class="n">json</span><span class="o">=</span><span class="n">process_chain</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">data</span>
+
+<div class="viewcode-block" id="ActiniaInterface.resource_info"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.resource_info">[docs]</a>    <span class="k">def</span> <span class="nf">resource_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/resources/</span><span class="si">%(user)s</span><span class="s2">/</span><span class="si">%(rid)s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="s2">&quot;rid&quot;</span><span class="p">:</span> <span class="n">resource_id</span><span class="p">}</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.delete_resource"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.delete_resource">[docs]</a>    <span class="k">def</span> <span class="nf">delete_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/resources/</span><span class="si">%(user)s</span><span class="s2">/</span><span class="si">%(rid)s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="s2">&quot;rid&quot;</span><span class="p">:</span> <span class="n">resource_id</span><span class="p">}</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.list_locations"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_locations">[docs]</a>    <span class="k">def</span> <span class="nf">list_locations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">}</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s2">&quot;locations&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.create_mapset"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.create_mapset">[docs]</a>    <span class="k">def</span> <span class="nf">create_mapset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapset</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;PERMANENT&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/mapsets/</span><span class="si">%(mapset)s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                      <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+                                                                      <span class="s2">&quot;mapset&quot;</span><span class="p">:</span> <span class="n">mapset</span><span class="p">}</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.delete_mapset"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.delete_mapset">[docs]</a>    <span class="k">def</span> <span class="nf">delete_mapset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapset</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;PERMANENT&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/mapsets/</span><span class="si">%(mapset)s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                      <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+                                                                      <span class="s2">&quot;mapset&quot;</span><span class="p">:</span> <span class="n">mapset</span><span class="p">}</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">data</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.list_mapsets"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_mapsets">[docs]</a>    <span class="k">def</span> <span class="nf">list_mapsets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/mapsets&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                           <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_get_request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.mapset_info"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.mapset_info">[docs]</a>    <span class="k">def</span> <span class="nf">mapset_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapset</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/mapsets/</span><span class="si">%(mapset)s</span><span class="s2">/info&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                           <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+                                                                           <span class="s2">&quot;mapset&quot;</span><span class="p">:</span> <span class="n">mapset</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_get_request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.list_raster"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_raster">[docs]</a>    <span class="k">def</span> <span class="nf">list_raster</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapset</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/mapsets/</span><span class="si">%(mapset)s</span><span class="s2">/raster_layers&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                                    <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+                                                                                    <span class="s2">&quot;mapset&quot;</span><span class="p">:</span> <span class="n">mapset</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_get_request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.list_vector"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_vector">[docs]</a>    <span class="k">def</span> <span class="nf">list_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapset</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/mapsets/</span><span class="si">%(mapset)s</span><span class="s2">/vector_layers&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                                    <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+                                                                                    <span class="s2">&quot;mapset&quot;</span><span class="p">:</span> <span class="n">mapset</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_get_request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.list_strds"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_strds">[docs]</a>    <span class="k">def</span> <span class="nf">list_strds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapset</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>  <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/mapsets/</span><span class="si">%(mapset)s</span><span class="s2">/strds&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+                                                                            <span class="s2">&quot;mapset&quot;</span><span class="p">:</span> <span class="n">mapset</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_get_request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.layer_info"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.layer_info">[docs]</a>    <span class="k">def</span> <span class="nf">layer_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return informations about the requested layer, that can be of type raster, vector or strds</span>
+
+<span class="sd">        :param layer_name:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">location</span><span class="p">,</span> <span class="n">mapset</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">layer</span> <span class="o">=</span> <span class="n">ActiniaInterface</span><span class="o">.</span><span class="n">layer_def_to_components</span><span class="p">(</span><span class="n">layer_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s2">&quot;raster&quot;</span><span class="p">:</span>
+            <span class="n">datatype</span> <span class="o">=</span> <span class="s2">&quot;raster_layers&quot;</span>
+        <span class="k">if</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s2">&quot;vector&quot;</span><span class="p">:</span>
+            <span class="n">datatype</span> <span class="o">=</span> <span class="s2">&quot;vector_layers&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/mapsets/</span><span class="si">%(mapset)s</span><span class="s2">/</span><span class="si">%(dtype)s</span><span class="s2">/</span><span class="si">%(layer)s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                                          <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+                                                                                          <span class="s2">&quot;mapset&quot;</span><span class="p">:</span> <span class="n">mapset</span><span class="p">,</span>
+                                                                                          <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="n">datatype</span><span class="p">,</span>
+                                                                                          <span class="s2">&quot;layer&quot;</span><span class="p">:</span> <span class="n">layer</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_get_request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.check_layer_exists"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.check_layer_exists">[docs]</a>    <span class="k">def</span> <span class="nf">check_layer_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return True if the strds exists, False otherwise</span>
+
+<span class="sd">        :param strds_name: The name of the strds</span>
+<span class="sd">        :return: True if the strds exists, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get region information about the required strds and check if it exists</span>
+        <span class="n">status_code</span><span class="p">,</span> <span class="n">layer_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer_info</span><span class="p">(</span><span class="n">layer_name</span><span class="o">=</span><span class="n">layer_name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.async_persistent_processing"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.async_persistent_processing">[docs]</a>    <span class="k">def</span> <span class="nf">async_persistent_processing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mapset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">process_chain</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Send a process chain to the Actinia backend to be run asynchronously in a persistent database</span>
+
+<span class="sd">        :param location: The location in which to process</span>
+<span class="sd">        :param mapset: The new mapset to generate</span>
+<span class="sd">        :param process_chain: The process chain that must be executed</span>
+<span class="sd">        :return: Status code and the json data (status, json)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/mapsets/</span><span class="si">%(mapset)s</span><span class="s2">/processing_async&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                                       <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+                                                                                       <span class="s2">&quot;mapset&quot;</span><span class="p">:</span> <span class="n">mapset</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_post_request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">process_chain</span><span class="o">=</span><span class="n">process_chain</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.async_ephemeral_processing"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.async_ephemeral_processing">[docs]</a>    <span class="k">def</span> <span class="nf">async_ephemeral_processing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">process_chain</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Send a process chain to the Actinia backend to be run asynchronously in a ephemeral database</span>
+
+<span class="sd">        :param location: The location in which to process</span>
+<span class="sd">        :param process_chain: The process chain that must be executed</span>
+<span class="sd">        :return: Status code and the json data (status, json)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/processing_async&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                    <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_post_request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">process_chain</span><span class="o">=</span><span class="n">process_chain</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.sync_ephemeral_processing_validation"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.sync_ephemeral_processing_validation">[docs]</a>    <span class="k">def</span> <span class="nf">sync_ephemeral_processing_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">process_chain</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Send a process chain to the Actinia backend to be validated</span>
+
+<span class="sd">        :param location: The location in which to process</span>
+<span class="sd">        :param process_chain: The process chain that must be executed</span>
+<span class="sd">        :return: Status code and the json data (status, json)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/process_chain_validation_sync&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                                 <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_post_request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">process_chain</span><span class="o">=</span><span class="n">process_chain</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ActiniaInterface.async_ephemeral_processing_export"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.async_ephemeral_processing_export">[docs]</a>    <span class="k">def</span> <span class="nf">async_ephemeral_processing_export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">process_chain</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Send a process chain to the Actinia backend to be run asynchronously in a ephemeral database</span>
+<span class="sd">        with export capabilities</span>
+
+<span class="sd">        :param location: The location in which to process</span>
+<span class="sd">        :param process_chain: The process chain that must be executed</span>
+<span class="sd">        :return: Status code and the json data (status, json)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(base)s</span><span class="s2">/locations/</span><span class="si">%(location)s</span><span class="s2">/processing_async_export&quot;</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                                                                               <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_post_request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">process_chain</span><span class="o">=</span><span class="n">process_chain</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Soeren Gebbert.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

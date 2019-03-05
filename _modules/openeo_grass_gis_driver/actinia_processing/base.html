@@ -1,0 +1,269 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>openeo_grass_gis_driver.actinia_processing.base &#8212; openeo_grass_gis_driver  documentation</title>
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for openeo_grass_gis_driver.actinia_processing.base</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="c1"># This is the process dictionary that is used to store all processes of the Actinia wrapper</span>
+<span class="n">PROCESS_DESCRIPTION_DICT</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">PROCESS_DICT</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;Apache License, Version 2.0&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Sören Gebbert&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2018, Sören Gebbert, mundialis&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Soeren Gebbert&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;soerengebbert@googlemail.com&quot;</span>
+
+
+<div class="viewcode-block" id="analyse_process_graph"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.base.analyse_process_graph">[docs]</a><span class="k">def</span> <span class="nf">analyse_process_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Analyse a process graph and call the required subprocess analysis</span>
+
+<span class="sd">    This function return the list of input names for the next process and the</span>
+<span class="sd">    Actinia process chain that was build before.</span>
+
+<span class="sd">    :param graph: The process description</span>
+<span class="sd">    :return: (output_name_list, process_list)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">graph</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Empty process graph&quot;</span><span class="p">)</span>
+
+    <span class="n">process_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">output_name_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">:</span>
+        <span class="n">process</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;process_id&quot;</span> <span class="ow">in</span> <span class="n">process</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">process</span><span class="p">[</span><span class="s2">&quot;process_id&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PROCESS_DICT</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unsupported process id, available processes: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">PROCESS_DICT</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+            <span class="n">outputs</span><span class="p">,</span> <span class="n">processes</span> <span class="o">=</span> <span class="n">PROCESS_DICT</span><span class="p">[</span><span class="n">process</span><span class="p">[</span><span class="s2">&quot;process_id&quot;</span><span class="p">]](</span><span class="n">process</span><span class="p">)</span>
+            <span class="n">process_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">processes</span><span class="p">)</span>
+            <span class="n">output_name_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output_name_list</span><span class="p">,</span> <span class="n">process_list</span></div>
+
+<span class="c1">###############################################################################</span>
+<span class="c1">####### Version 0.4 of the API ################################################</span>
+<span class="c1">###############################################################################</span>
+
+<div class="viewcode-block" id="ProcessNode"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.base.ProcessNode">[docs]</a><span class="k">class</span> <span class="nc">ProcessNode</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A single node in the process graph</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">process_description</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">process_description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">[</span><span class="s2">&quot;process_id&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="s2">&quot;arguments&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="p">[</span><span class="s2">&quot;arguments&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">ProcessNode</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ProcessNode</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_process_description</span> <span class="o">=</span> <span class="n">process_description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_was_processed</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">processed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_was_processed</span>
+
+    <span class="nd">@processed</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">processed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_was_processed</span> <span class="o">=</span> <span class="n">flag</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">child_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">child_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">id</span>
+
+        <span class="n">parent_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">:</span>
+            <span class="n">parent_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parents</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;Node: </span><span class="si">{self.id}</span><span class="s2"> parents: </span><span class="si">{parent_ids}</span><span class="s2"> child: </span><span class="si">{child_id}</span><span class="s2">&quot;</span>
+
+<div class="viewcode-block" id="ProcessNode.get_parent_ids"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.base.ProcessNode.get_parent_ids">[docs]</a>    <span class="k">def</span> <span class="nf">get_parent_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="n">parent_ids</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">if</span> <span class="s2">&quot;from_node&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="n">parent_ids</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s2">&quot;from_node&quot;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">parent_ids</span></div>
+
+<div class="viewcode-block" id="ProcessNode.asDict"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.base.ProcessNode.asDict">[docs]</a>    <span class="k">def</span> <span class="nf">asDict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_description</span></div></div>
+
+
+<div class="viewcode-block" id="ProcessGraph"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.base.ProcessGraph">[docs]</a><span class="k">class</span> <span class="nc">ProcessGraph</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;This class represents a process graph</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph_description</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The constructor checks the validity of the provided dictionary</span>
+<span class="sd">        and build the node interconnections</span>
+
+<span class="sd">        :param graph_description:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="s2">&quot;title&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph_description</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Title is required in the process graph&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;description&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph_description</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Description is required in the process graph&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="s2">&quot;process_graph&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">graph_description</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;process_graph is required in the process graph&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">graph_description</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">graph_description</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">ProcessNode</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_nodes</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">ProcessNode</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_process_graph_from_description</span><span class="p">(</span><span class="n">graph_description</span><span class="o">=</span><span class="n">graph_description</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ProcessGraph.build_process_graph_from_description"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.base.ProcessGraph.build_process_graph_from_description">[docs]</a>    <span class="k">def</span> <span class="nf">build_process_graph_from_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph_description</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Build the directed process graph from the graph description</span>
+
+<span class="sd">        :param graph_description: The description of the graph as dictionary</span>
+<span class="sd">        :return: The set of child nodes that are the roots of the process graph</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">graph_description</span><span class="p">[</span><span class="s2">&quot;process_graph&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">process_description</span> <span class="o">=</span> <span class="n">graph_description</span><span class="p">[</span><span class="s2">&quot;process_graph&quot;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">ProcessNode</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">process_description</span><span class="o">=</span><span class="n">process_description</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">node_dict</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
+
+        <span class="c1"># Create node connections</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="c1"># Connect parents with childs</span>
+            <span class="n">parent_ids</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get_parent_ids</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">parent_ids</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">parent_id</span> <span class="ow">in</span> <span class="n">parent_ids</span><span class="p">:</span>
+                    <span class="n">parent_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_dict</span><span class="p">[</span><span class="n">parent_id</span><span class="p">]</span>
+                    <span class="n">node</span><span class="o">.</span><span class="n">parents</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">parent_node</span><span class="p">)</span>
+                    <span class="n">parent_node</span><span class="o">.</span><span class="n">child</span> <span class="o">=</span> <span class="n">node</span>
+
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">node_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">child</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root_nodes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="process_node_to_actinia_process_chain"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.base.process_node_to_actinia_process_chain">[docs]</a><span class="k">def</span> <span class="nf">process_node_to_actinia_process_chain</span><span class="p">(</span><span class="n">node</span><span class="p">:</span> <span class="n">ProcessNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;This function calls the openEO process node to actinia process chain converter process</span>
+<span class="sd">    based on the node process_id.</span>
+
+<span class="sd">    It will gather the actinia process chain and the output identifier of the</span>
+<span class="sd">    process converter and sets the node status to processed==True.</span>
+
+<span class="sd">    :param node: A single process node</span>
+<span class="sd">    :return: (output_name_list, process_list)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Missing process node&quot;</span><span class="p">)</span>
+
+    <span class="n">process_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">output_name_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">process_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PROCESS_DICT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unsupported process id, available processes: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">PROCESS_DICT</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="n">outputs</span><span class="p">,</span> <span class="n">processes</span> <span class="o">=</span> <span class="n">PROCESS_DICT</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">process_id</span><span class="p">](</span><span class="n">node</span><span class="p">)</span>
+    <span class="n">process_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">processes</span><span class="p">)</span>
+    <span class="n">output_name_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+
+    <span class="n">node</span><span class="o">.</span><span class="n">processed</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">output_name_list</span><span class="p">,</span> <span class="n">process_list</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Soeren Gebbert.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

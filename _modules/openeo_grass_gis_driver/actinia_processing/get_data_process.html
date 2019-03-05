@@ -1,0 +1,221 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>openeo_grass_gis_driver.actinia_processing.get_data_process &#8212; openeo_grass_gis_driver  documentation</title>
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for openeo_grass_gis_driver.actinia_processing.get_data_process</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randint</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">openeo_grass_gis_driver.actinia_processing.base</span> <span class="k">import</span> <span class="n">analyse_process_graph</span><span class="p">,</span> <span class="n">PROCESS_DICT</span><span class="p">,</span> <span class="n">PROCESS_DESCRIPTION_DICT</span>
+<span class="kn">from</span> <span class="nn">openeo_grass_gis_driver.process_schemas</span> <span class="k">import</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">ProcessDescription</span><span class="p">,</span> <span class="n">ReturnValue</span>
+<span class="kn">from</span> <span class="nn">openeo_grass_gis_driver.actinia_processing.actinia_interface</span> <span class="k">import</span> <span class="n">ActiniaInterface</span>
+
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;Apache License, Version 2.0&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Sören Gebbert&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2018, Sören Gebbert, mundialis&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Soeren Gebbert&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;soerengebbert@googlemail.com&quot;</span>
+
+<span class="n">PROCESS_NAME</span> <span class="o">=</span> <span class="s2">&quot;get_data&quot;</span>
+
+
+<div class="viewcode-block" id="create_process_description"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.get_data_process.create_process_description">[docs]</a><span class="k">def</span> <span class="nf">create_process_description</span><span class="p">():</span>
+    <span class="n">p_imagery</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Any openEO process object that returns raster datasets &quot;</span>
+                                      <span class="s2">&quot;or space-time raster dataset&quot;</span><span class="p">,</span>
+                          <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;eodata&quot;</span><span class="p">},</span>
+                          <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">p_data_id</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;The identifier of a single raster-, vector- or space-time raster dataset&quot;</span><span class="p">,</span>
+                          <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                                  <span class="s2">&quot;examples&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;nc_spm_08.landsat.raster.lsat5_1987_10&quot;</span><span class="p">,</span>
+                                               <span class="s2">&quot;nc_spm_08.PERMANENT.vector.lakes&quot;</span><span class="p">,</span>
+                                               <span class="s2">&quot;ECAD.PERMANENT.strds.temperature_1950_2017_yearly&quot;</span><span class="p">]},</span>
+                          <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">rv</span> <span class="o">=</span> <span class="n">ReturnValue</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Processed EO data.&quot;</span><span class="p">,</span>
+                     <span class="n">schema</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;eodata&quot;</span><span class="p">})</span>
+
+    <span class="n">simple_example</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;process_id&quot;</span><span class="p">:</span> <span class="n">PROCESS_NAME</span><span class="p">,</span>
+        <span class="s2">&quot;data_id&quot;</span><span class="p">:</span> <span class="s2">&quot;nc_spm_08.PERMANENT.vector.lakes&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">raster_vector_example</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;process_id&quot;</span><span class="p">:</span> <span class="n">PROCESS_NAME</span><span class="p">,</span>
+        <span class="s2">&quot;data_id&quot;</span><span class="p">:</span> <span class="s2">&quot;nc_spm_08.landsat.raster.lsat5_1987_10&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;imagery&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;process_id&quot;</span><span class="p">:</span> <span class="s2">&quot;get_data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;data_id&quot;</span><span class="p">:</span> <span class="s2">&quot;nc_spm_08.PERMANENT.vector.lakes&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">strds_example</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;process_id&quot;</span><span class="p">:</span> <span class="n">PROCESS_NAME</span><span class="p">,</span>
+        <span class="s2">&quot;data_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ECAD.PERMANENT.strds.temperature_1950_2017_yearly&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;imagery&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;process_id&quot;</span><span class="p">:</span> <span class="s2">&quot;get_data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;data_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ECAD.PERMANENT.strds.precipitation_1950_2017_yearly&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">examples</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">simple_example</span><span class="o">=</span><span class="n">simple_example</span><span class="p">,</span>
+                    <span class="n">raster_vector_example</span><span class="o">=</span><span class="n">raster_vector_example</span><span class="p">,</span>
+                    <span class="n">strds_example</span><span class="o">=</span><span class="n">strds_example</span><span class="p">)</span>
+
+    <span class="n">pd</span> <span class="o">=</span> <span class="n">ProcessDescription</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">PROCESS_NAME</span><span class="p">,</span>
+                            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This process returns a raster-, a vector- or a space-time raster &quot;</span>
+                                        <span class="s2">&quot;datasets that is available in the /collections endpoint.&quot;</span><span class="p">,</span>
+                            <span class="n">summary</span><span class="o">=</span><span class="s2">&quot;Returns a single dataset that is available in &quot;</span>
+                                    <span class="s2">&quot;the /collections endpoint for processing&quot;</span><span class="p">,</span>
+                            <span class="n">parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;imagery&quot;</span><span class="p">:</span> <span class="n">p_imagery</span><span class="p">,</span> <span class="s2">&quot;data_id&quot;</span><span class="p">:</span> <span class="n">p_data_id</span><span class="p">},</span>
+                            <span class="n">returns</span><span class="o">=</span><span class="n">rv</span><span class="p">,</span>
+                            <span class="n">examples</span><span class="o">=</span><span class="n">examples</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span></div>
+
+
+<span class="n">PROCESS_DESCRIPTION_DICT</span><span class="p">[</span><span class="n">PROCESS_NAME</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_process_description</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="create_process_chain_entry"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.get_data_process.create_process_chain_entry">[docs]</a><span class="k">def</span> <span class="nf">create_process_chain_entry</span><span class="p">(</span><span class="n">input_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a Actinia process description that uses t.rast.series to create the minimum</span>
+<span class="sd">    value of the time series.</span>
+
+<span class="sd">    :param input_time_series: The input time series name</span>
+<span class="sd">    :param output_map: The name of the output map</span>
+<span class="sd">    :return: A Actinia process chain description</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">location</span><span class="p">,</span> <span class="n">mapset</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">layer_name</span> <span class="o">=</span> <span class="n">ActiniaInterface</span><span class="o">.</span><span class="n">layer_def_to_components</span><span class="p">(</span><span class="n">input_name</span><span class="p">)</span>
+    <span class="n">input_name</span> <span class="o">=</span> <span class="n">layer_name</span>
+    <span class="k">if</span> <span class="n">mapset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">input_name</span> <span class="o">=</span> <span class="n">layer_name</span> <span class="o">+</span> <span class="s2">&quot;@&quot;</span> <span class="o">+</span> <span class="n">mapset</span>
+
+    <span class="n">rn</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">)</span>
+
+    <span class="n">pc</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">if</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s2">&quot;raster&quot;</span><span class="p">:</span>
+        <span class="n">pc</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;r_info_</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rn</span><span class="p">,</span>
+              <span class="s2">&quot;module&quot;</span><span class="p">:</span> <span class="s2">&quot;r.info&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;param&quot;</span><span class="p">:</span> <span class="s2">&quot;map&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">input_name</span><span class="p">},</span> <span class="p">],</span>
+              <span class="s2">&quot;flags&quot;</span><span class="p">:</span> <span class="s2">&quot;g&quot;</span><span class="p">}</span>
+    <span class="k">elif</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s2">&quot;vector&quot;</span><span class="p">:</span>
+        <span class="n">pc</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;v_info_</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rn</span><span class="p">,</span>
+              <span class="s2">&quot;module&quot;</span><span class="p">:</span> <span class="s2">&quot;v.info&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;param&quot;</span><span class="p">:</span> <span class="s2">&quot;map&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">input_name</span><span class="p">},</span> <span class="p">],</span>
+              <span class="s2">&quot;flags&quot;</span><span class="p">:</span> <span class="s2">&quot;g&quot;</span><span class="p">}</span>
+    <span class="k">elif</span> <span class="n">datatype</span> <span class="o">==</span> <span class="s2">&quot;strds&quot;</span><span class="p">:</span>
+        <span class="n">pc</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;t_info_</span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rn</span><span class="p">,</span>
+              <span class="s2">&quot;module&quot;</span><span class="p">:</span> <span class="s2">&quot;t.info&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;param&quot;</span><span class="p">:</span> <span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">input_name</span><span class="p">},</span> <span class="p">],</span>
+              <span class="s2">&quot;flags&quot;</span><span class="p">:</span> <span class="s2">&quot;g&quot;</span><span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Unsupported datatype&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pc</span></div>
+
+
+<div class="viewcode-block" id="get_process_list"><a class="viewcode-back" href="../../../api/openeo_grass_gis_driver.actinia_processing.html#openeo_grass_gis_driver.actinia_processing.get_data_process.get_process_list">[docs]</a><span class="k">def</span> <span class="nf">get_process_list</span><span class="p">(</span><span class="n">process</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Analyse the process description and return the Actinia process chain and the name of the processing result</span>
+
+<span class="sd">    :param process: The process description</span>
+<span class="sd">    :return: (output_names, actinia_process_list)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">input_names</span><span class="p">,</span> <span class="n">process_list</span> <span class="o">=</span> <span class="n">analyse_process_graph</span><span class="p">(</span><span class="n">process</span><span class="p">)</span>
+    <span class="n">output_names</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># First analyse the data entrie</span>
+    <span class="k">if</span> <span class="s2">&quot;data_id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">process</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Process </span><span class="si">%s</span><span class="s2"> requires parameter &lt;data_id&gt;&quot;</span> <span class="o">%</span> <span class="n">PROCESS_NAME</span><span class="p">)</span>
+
+    <span class="n">output_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">process</span><span class="p">[</span><span class="s2">&quot;data_id&quot;</span><span class="p">])</span>
+
+    <span class="n">pc</span> <span class="o">=</span> <span class="n">create_process_chain_entry</span><span class="p">(</span><span class="n">input_name</span><span class="o">=</span><span class="n">process</span><span class="p">[</span><span class="s2">&quot;data_id&quot;</span><span class="p">])</span>
+    <span class="n">process_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pc</span><span class="p">)</span>
+
+    <span class="c1"># Then add the input to the output</span>
+    <span class="k">for</span> <span class="n">input_name</span> <span class="ow">in</span> <span class="n">input_names</span><span class="p">:</span>
+        <span class="c1"># Create the output name based on the input name and method</span>
+        <span class="n">output_name</span> <span class="o">=</span> <span class="n">input_name</span>
+        <span class="n">output_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">output_name</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">output_names</span><span class="p">,</span> <span class="n">process_list</span></div>
+
+
+<span class="n">PROCESS_DICT</span><span class="p">[</span><span class="n">PROCESS_NAME</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_process_list</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Soeren Gebbert.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>openeo_grass_gis_driver.process_schemas &#8212; openeo_grass_gis_driver  documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for openeo_grass_gis_driver.process_schemas</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;This file includes all required openEO response schemas</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">openeo_grass_gis_driver.schema_base</span> <span class="k">import</span> <span class="n">JsonableObject</span><span class="p">,</span> <span class="n">EoLinks</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Sören Gebbert&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2018, Sören Gebbert, mundialis&quot;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s2">&quot;Sören Gebbert&quot;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s2">&quot;soerengebbert@googlemail.com&quot;</span>
+
+
+<div class="viewcode-block" id="DependentObject"><a class="viewcode-back" href="../../api/openeo_grass_gis_driver.html#openeo_grass_gis_driver.process_schemas.DependentObject">[docs]</a><span class="k">class</span> <span class="nc">DependentObject</span><span class="p">(</span><span class="n">JsonableObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is the definition of a dependent object of a parameter</span>
+
+<span class="sd">    description:</span>
+<span class="sd">        string (description) Nullable</span>
+<span class="sd">        Detailed description to fully explain the entity.</span>
+
+<span class="sd">        CommonMark 0.28 syntax MAY be used for rich text representation.</span>
+
+<span class="sd">    parameter:</span>
+<span class="sd">        required</span>
+<span class="sd">        string</span>
+<span class="sd">        The name of the referenced parameter.</span>
+
+<span class="sd">    ref_values:</span>
+<span class="sd">        Array of any</span>
+<span class="sd">        Embedded literal value that the referenced parameter MUST hold for this dependency to apply.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">ref_values</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span> <span class="o">=</span> <span class="n">parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ref_values</span> <span class="o">=</span> <span class="n">ref_values</span></div>
+
+
+<div class="viewcode-block" id="Parameter"><a class="viewcode-back" href="../../api/openeo_grass_gis_driver.html#openeo_grass_gis_driver.process_schemas.Parameter">[docs]</a><span class="k">class</span> <span class="nc">Parameter</span><span class="p">(</span><span class="n">JsonableObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is a single parameter of a process</span>
+
+<span class="sd">    description:</span>
+<span class="sd">        required</span>
+<span class="sd">        string (description) Nullable</span>
+<span class="sd">        Detailed description to fully explain the entity.</span>
+
+<span class="sd">        CommonMark 0.28 syntax MAY be used for rich text representation.</span>
+
+<span class="sd">    required:</span>
+<span class="sd">        boolean</span>
+<span class="sd">        Default: false</span>
+<span class="sd">        Determines whether this parameter is mandatory.</span>
+
+<span class="sd">    deprecated:</span>
+<span class="sd">        boolean</span>
+<span class="sd">        Default: false</span>
+<span class="sd">        Specifies that a parameter is deprecated and SHOULD be transitioned out of usage.</span>
+
+<span class="sd">    mime_type:</span>
+<span class="sd">        string</span>
+<span class="sd">        The mime type that the parameter is formatted with.</span>
+
+<span class="sd">    schema:</span>
+<span class="sd">        required</span>
+<span class="sd">        object (json_schema)</span>
+<span class="sd">        A schema object according to the specification of JSON Schema draft-07.</span>
+<span class="sd">        Additional values for format are defined centrally in the API documentation, e.g. bbox or crs.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+                 <span class="n">required</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">dependencies</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">DependentObject</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">depricated</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">mime_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">required</span> <span class="o">=</span> <span class="n">required</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="n">dependencies</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">depricated</span> <span class="o">=</span> <span class="n">depricated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mime_type</span> <span class="o">=</span> <span class="n">mime_type</span></div>
+
+
+<div class="viewcode-block" id="ReturnValue"><a class="viewcode-back" href="../../api/openeo_grass_gis_driver.html#openeo_grass_gis_driver.process_schemas.ReturnValue">[docs]</a><span class="k">class</span> <span class="nc">ReturnValue</span><span class="p">(</span><span class="n">JsonableObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    description:</span>
+<span class="sd">        required</span>
+<span class="sd">        string (description) Nullable</span>
+<span class="sd">        Detailed description to fully explain the entity.</span>
+
+<span class="sd">        CommonMark 0.28 syntax MAY be used for rich text representation.</span>
+
+<span class="sd">    mime_type:</span>
+<span class="sd">        string</span>
+<span class="sd">        The mime type that the returned data is formatted with.</span>
+
+<span class="sd">    schema:</span>
+<span class="sd">        required</span>
+<span class="sd">        object (json_schema)</span>
+<span class="sd">        A schema object according to the specification of JSON Schema draft-07.</span>
+<span class="sd">        Additional values for format are defined centrally in the API documentation, e.g. bbox or crs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">mime_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mime_type</span> <span class="o">=</span> <span class="n">mime_type</span></div>
+
+
+<div class="viewcode-block" id="ProcessException"><a class="viewcode-back" href="../../api/openeo_grass_gis_driver.html#openeo_grass_gis_driver.process_schemas.ProcessException">[docs]</a><span class="k">class</span> <span class="nc">ProcessException</span><span class="p">(</span><span class="n">JsonableObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    code:</span>
+<span class="sd">        integer</span>
+<span class="sd">        Code to identify the exception.</span>
+
+<span class="sd">    description:</span>
+<span class="sd">        required</span>
+<span class="sd">        string (description) Nullable</span>
+<span class="sd">        Detailed description to fully explain the entity.</span>
+
+<span class="sd">        CommonMark 0.28 syntax MAY be used for rich text representation.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span><span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">code</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span></div>
+
+
+<div class="viewcode-block" id="ProcessDescription"><a class="viewcode-back" href="../../api/openeo_grass_gis_driver.html#openeo_grass_gis_driver.process_schemas.ProcessDescription">[docs]</a><span class="k">class</span> <span class="nc">ProcessDescription</span><span class="p">(</span><span class="n">JsonableObject</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Parameter</span><span class="p">],</span>
+                 <span class="n">returns</span><span class="p">:</span> <span class="n">ReturnValue</span><span class="p">,</span>
+                 <span class="n">links</span><span class="p">:</span> <span class="n">EoLinks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(),</span>
+                 <span class="n">summary</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">min_parameters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">deprecated</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                 <span class="n">exceptions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ProcessException</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">examples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">returns</span> <span class="o">=</span> <span class="n">returns</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">links</span> <span class="o">=</span> <span class="n">links</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">summary</span> <span class="o">=</span> <span class="n">summary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_parameters</span> <span class="o">=</span> <span class="n">min_parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deprecated</span> <span class="o">=</span> <span class="n">deprecated</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exceptions</span> <span class="o">=</span> <span class="n">exceptions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">examples</span> <span class="o">=</span> <span class="n">examples</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Soeren Gebbert.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

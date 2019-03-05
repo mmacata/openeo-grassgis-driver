@@ -1,0 +1,941 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>openeo_grass_gis_driver.actinia_processing package &#8212; openeo_grass_gis_driver  documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="openeo_grass_gis_driver.utils package" href="openeo_grass_gis_driver.utils.html" />
+    <link rel="prev" title="openeo_grass_gis_driver package" href="openeo_grass_gis_driver.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="openeo_grass_gis_driver.utils.html" title="openeo_grass_gis_driver.utils package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="openeo_grass_gis_driver.html" title="openeo_grass_gis_driver package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >openeo_grass_gis_driver</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="openeo_grass_gis_driver.html" accesskey="U">openeo_grass_gis_driver package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">openeo_grass_gis_driver.actinia_processing package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.actinia_interface">openeo_grass_gis_driver.actinia_processing.actinia_interface module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.actinia_job_db">openeo_grass_gis_driver.actinia_processing.actinia_job_db module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.base">openeo_grass_gis_driver.actinia_processing.base module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.config">openeo_grass_gis_driver.actinia_processing.config module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.filter_bbox_process">openeo_grass_gis_driver.actinia_processing.filter_bbox_process module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.filter_daterange_process">openeo_grass_gis_driver.actinia_processing.filter_daterange_process module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.get_data_process">openeo_grass_gis_driver.actinia_processing.get_data_process module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.ndvi_2_process">openeo_grass_gis_driver.actinia_processing.ndvi_2_process module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.ndvi_process">openeo_grass_gis_driver.actinia_processing.ndvi_process module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.raster_exporter">openeo_grass_gis_driver.actinia_processing.raster_exporter module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.reduce_time_process">openeo_grass_gis_driver.actinia_processing.reduce_time_process module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.udf_reduce_time">openeo_grass_gis_driver.actinia_processing.udf_reduce_time module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing.zonal_statistics">openeo_grass_gis_driver.actinia_processing.zonal_statistics module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.actinia_processing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="openeo_grass_gis_driver.html"
+                        title="previous chapter">openeo_grass_gis_driver package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="openeo_grass_gis_driver.utils.html"
+                        title="next chapter">openeo_grass_gis_driver.utils package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/openeo_grass_gis_driver.actinia_processing.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="openeo-grass-gis-driver-actinia-processing-package">
+<h1>openeo_grass_gis_driver.actinia_processing package<a class="headerlink" href="#openeo-grass-gis-driver-actinia-processing-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.actinia_interface">
+<span id="openeo-grass-gis-driver-actinia-processing-actinia-interface-module"></span><h2>openeo_grass_gis_driver.actinia_processing.actinia_interface module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.actinia_interface" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.actinia_processing.actinia_interface.</code><code class="descname">ActiniaInterface</code><span class="sig-paren">(</span><em>config: openeo_grass_gis_driver.actinia_processing.config.Config = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This is the interface class to the actinia REST service that uses GRASS GIS as backend</p>
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.PROCESS_LOCATION">
+<code class="descname">PROCESS_LOCATION</code><em class="property"> = {}</em><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.PROCESS_LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.async_ephemeral_processing">
+<code class="descname">async_ephemeral_processing</code><span class="sig-paren">(</span><em>location: str</em>, <em>process_chain: dict</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.async_ephemeral_processing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.async_ephemeral_processing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a process chain to the Actinia backend to be run asynchronously in a ephemeral database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>location</strong> – The location in which to process</li>
+<li><strong>process_chain</strong> – The process chain that must be executed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Status code and the json data (status, json)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.async_ephemeral_processing_export">
+<code class="descname">async_ephemeral_processing_export</code><span class="sig-paren">(</span><em>location: str</em>, <em>process_chain: dict</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.async_ephemeral_processing_export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.async_ephemeral_processing_export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a process chain to the Actinia backend to be run asynchronously in a ephemeral database
+with export capabilities</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>location</strong> – The location in which to process</li>
+<li><strong>process_chain</strong> – The process chain that must be executed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Status code and the json data (status, json)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.async_persistent_processing">
+<code class="descname">async_persistent_processing</code><span class="sig-paren">(</span><em>location: str</em>, <em>mapset: str</em>, <em>process_chain: dict</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.async_persistent_processing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.async_persistent_processing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a process chain to the Actinia backend to be run asynchronously in a persistent database</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>location</strong> – The location in which to process</li>
+<li><strong>mapset</strong> – The new mapset to generate</li>
+<li><strong>process_chain</strong> – The process chain that must be executed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Status code and the json data (status, json)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.check_health">
+<code class="descname">check_health</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.check_health"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.check_health" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.check_layer_exists">
+<code class="descname">check_layer_exists</code><span class="sig-paren">(</span><em>layer_name: str</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.check_layer_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.check_layer_exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if the strds exists, False otherwise</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>strds_name</strong> – The name of the strds</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if the strds exists, False otherwise</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.create_mapset">
+<code class="descname">create_mapset</code><span class="sig-paren">(</span><em>location: str</em>, <em>mapset: str = 'PERMANENT'</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.create_mapset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.create_mapset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.delete_mapset">
+<code class="descname">delete_mapset</code><span class="sig-paren">(</span><em>location: str</em>, <em>mapset: str = 'PERMANENT'</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.delete_mapset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.delete_mapset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.delete_resource">
+<code class="descname">delete_resource</code><span class="sig-paren">(</span><em>resource_id: str</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.delete_resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.delete_resource" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.layer_def_to_components">
+<em class="property">static </em><code class="descname">layer_def_to_components</code><span class="sig-paren">(</span><em>layer: str</em><span class="sig-paren">)</span> &#x2192; Tuple[Optional[str], Optional[str], Optional[str], str]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.layer_def_to_components"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.layer_def_to_components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the name of a layer in the openeo framework into GRASS GIS definitions</p>
+<p>location.mapset.datatype.map_name -&gt; (location, mapset, datatype, layer)</p>
+<p>Return (None, None, None, map_name) if no location/mapset information was found</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>layer</strong> – The name of the map_name in the form location.mapset.map_name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(location, mapset, datatype, map_name) or (None, None, None, map_name)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.layer_def_to_grass_map_name">
+<em class="property">static </em><code class="descname">layer_def_to_grass_map_name</code><span class="sig-paren">(</span><em>layer: str</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.layer_def_to_grass_map_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.layer_def_to_grass_map_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the name of a layer in the openeo framework into GRASS GIS map name with optional mapset</p>
+<p>location.mapset.datatype.map_name -&gt; <a class="reference external" href="mailto:map_name&#37;&#52;&#48;mapset">map_name<span>&#64;</span>mapset</a></p>
+<p>Return layer if no location/mapset information was found</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>layer</strong> – The name of the layer in the form location.mapset.datatype.map_name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference external" href="mailto:map_name&#37;&#52;&#48;mapset">map_name<span>&#64;</span>mapset</a> or map_name</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.layer_info">
+<code class="descname">layer_info</code><span class="sig-paren">(</span><em>layer_name: str</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.layer_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.layer_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return informations about the requested layer, that can be of type raster, vector or strds</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>layer_name</strong> – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_locations">
+<code class="descname">list_locations</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.list_locations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_locations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_mapsets">
+<code class="descname">list_mapsets</code><span class="sig-paren">(</span><em>location: str</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.list_mapsets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_mapsets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_raster">
+<code class="descname">list_raster</code><span class="sig-paren">(</span><em>location: str</em>, <em>mapset: str</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.list_raster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_raster" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_strds">
+<code class="descname">list_strds</code><span class="sig-paren">(</span><em>location: str</em>, <em>mapset: str</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.list_strds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_strds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_vector">
+<code class="descname">list_vector</code><span class="sig-paren">(</span><em>location: str</em>, <em>mapset: str</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.list_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.list_vector" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.mapset_info">
+<code class="descname">mapset_info</code><span class="sig-paren">(</span><em>location: str</em>, <em>mapset: str</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.mapset_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.mapset_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.resource_info">
+<code class="descname">resource_info</code><span class="sig-paren">(</span><em>resource_id: str</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.resource_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.resource_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.set_auth">
+<code class="descname">set_auth</code><span class="sig-paren">(</span><em>user: str</em>, <em>password: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.set_auth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.set_auth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.sync_ephemeral_processing_validation">
+<code class="descname">sync_ephemeral_processing_validation</code><span class="sig-paren">(</span><em>location: str</em>, <em>process_chain: dict</em><span class="sig-paren">)</span> &#x2192; Tuple[int, dict]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_interface.html#ActiniaInterface.sync_ephemeral_processing_validation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_interface.ActiniaInterface.sync_ephemeral_processing_validation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a process chain to the Actinia backend to be validated</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>location</strong> – The location in which to process</li>
+<li><strong>process_chain</strong> – The process chain that must be executed</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Status code and the json data (status, json)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.actinia_job_db">
+<span id="openeo-grass-gis-driver-actinia-processing-actinia-job-db-module"></span><h2>openeo_grass_gis_driver.actinia_processing.actinia_job_db module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.actinia_job_db" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.actinia_processing.actinia_job_db.ActiniaJobDB">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.actinia_processing.actinia_job_db.</code><code class="descname">ActiniaJobDB</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/actinia_job_db.html#ActiniaJobDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.actinia_job_db.ActiniaJobDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sqlitedict.SqliteDict</span></code></p>
+<p>This is the storage of all actinia jobs that where committed</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.base">
+<span id="openeo-grass-gis-driver-actinia-processing-base-module"></span><h2>openeo_grass_gis_driver.actinia_processing.base module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.actinia_processing.base.ProcessGraph">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.actinia_processing.base.</code><code class="descname">ProcessGraph</code><span class="sig-paren">(</span><em>graph_description: dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/base.html#ProcessGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.base.ProcessGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class represents a process graph</p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.base.ProcessGraph.build_process_graph_from_description">
+<code class="descname">build_process_graph_from_description</code><span class="sig-paren">(</span><em>graph_description: dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/base.html#ProcessGraph.build_process_graph_from_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.base.ProcessGraph.build_process_graph_from_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the directed process graph from the graph description</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>graph_description</strong> – The description of the graph as dictionary</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The set of child nodes that are the roots of the process graph</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.actinia_processing.base.ProcessNode">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.actinia_processing.base.</code><code class="descname">ProcessNode</code><span class="sig-paren">(</span><em>id</em>, <em>process_description: dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/base.html#ProcessNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.base.ProcessNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A single node in the process graph</p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.base.ProcessNode.asDict">
+<code class="descname">asDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/base.html#ProcessNode.asDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.base.ProcessNode.asDict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.actinia_processing.base.ProcessNode.get_parent_ids">
+<code class="descname">get_parent_ids</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; set<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/base.html#ProcessNode.get_parent_ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.base.ProcessNode.get_parent_ids" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.base.ProcessNode.processed">
+<code class="descname">processed</code><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.base.ProcessNode.processed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.base.analyse_process_graph">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.base.</code><code class="descname">analyse_process_graph</code><span class="sig-paren">(</span><em>graph: dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/base.html#analyse_process_graph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.base.analyse_process_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse a process graph and call the required subprocess analysis</p>
+<p>This function return the list of input names for the next process and the
+Actinia process chain that was build before.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>graph</strong> – The process description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_name_list, process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.base.process_node_to_actinia_process_chain">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.base.</code><code class="descname">process_node_to_actinia_process_chain</code><span class="sig-paren">(</span><em>node: openeo_grass_gis_driver.actinia_processing.base.ProcessNode</em><span class="sig-paren">)</span> &#x2192; Tuple[list, list]<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/base.html#process_node_to_actinia_process_chain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.base.process_node_to_actinia_process_chain" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function calls the openEO process node to actinia process chain converter process
+based on the node process_id.</p>
+<p>It will gather the actinia process chain and the output identifier of the
+process converter and sets the node status to processed==True.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> – A single process node</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_name_list, process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.config">
+<span id="openeo-grass-gis-driver-actinia-processing-config-module"></span><h2>openeo_grass_gis_driver.actinia_processing.config module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.config" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.actinia_processing.config.Config">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.actinia_processing.config.</code><code class="descname">Config</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/config.html#Config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.config.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.config.Config.ACTINIA_JOB_DB">
+<code class="descname">ACTINIA_JOB_DB</code><em class="property"> = '/home/travis/.actinia_job_db_file.sqlite'</em><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.config.Config.ACTINIA_JOB_DB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.config.Config.GRAPH_DB">
+<code class="descname">GRAPH_DB</code><em class="property"> = '/home/travis/.graph_db_file.sqlite'</em><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.config.Config.GRAPH_DB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.config.Config.HOST">
+<code class="descname">HOST</code><em class="property"> = 'https://actinia.mundialis.de'</em><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.config.Config.HOST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.config.Config.JOB_DB">
+<code class="descname">JOB_DB</code><em class="property"> = '/home/travis/.job_db_file.sqlite'</em><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.config.Config.JOB_DB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.config.Config.LOCATION">
+<code class="descname">LOCATION</code><em class="property"> = 'nc_spm_08'</em><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.config.Config.LOCATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.config.Config.LOCATIONS">
+<code class="descname">LOCATIONS</code><em class="property"> = ['nc_spm_08']</em><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.config.Config.LOCATIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.config.Config.PASSWORD">
+<code class="descname">PASSWORD</code><em class="property"> = 'test'</em><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.config.Config.PASSWORD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.config.Config.PORT">
+<code class="descname">PORT</code><em class="property"> = 443</em><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.config.Config.PORT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.actinia_processing.config.Config.USER">
+<code class="descname">USER</code><em class="property"> = 'user'</em><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.config.Config.USER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.filter_bbox_process">
+<span id="openeo-grass-gis-driver-actinia-processing-filter-bbox-process-module"></span><h2>openeo_grass_gis_driver.actinia_processing.filter_bbox_process module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.filter_bbox_process" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.filter_bbox_process.create_process_chain_entry">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.filter_bbox_process.</code><code class="descname">create_process_chain_entry</code><span class="sig-paren">(</span><em>left: float</em>, <em>right: float</em>, <em>top: float</em>, <em>bottom: float</em>, <em>width_res: float</em>, <em>height_res: float</em><span class="sig-paren">)</span> &#x2192; dict<a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/filter_bbox_process.html#create_process_chain_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.filter_bbox_process.create_process_chain_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Actinia command of the process chain that uses g.region to create a valid computational region
+for the provide input strds</p>
+<dl class="docutils">
+<dt>TODO: This approach is a hack, the g.region command should accept a STRDS as input to set the</dt>
+<dd>resolution accordingly, or this function must have the resolution option set by the user.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>left</strong> – </li>
+<li><strong>right</strong> – </li>
+<li><strong>top</strong> – </li>
+<li><strong>bottom</strong> – </li>
+<li><strong>width_res</strong> – </li>
+<li><strong>height_res</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Actinia process chain description</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.filter_bbox_process.create_process_description">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.filter_bbox_process.</code><code class="descname">create_process_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/filter_bbox_process.html#create_process_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.filter_bbox_process.create_process_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.filter_bbox_process.get_process_list">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.filter_bbox_process.</code><code class="descname">get_process_list</code><span class="sig-paren">(</span><em>process</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/filter_bbox_process.html#get_process_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.filter_bbox_process.get_process_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the process description and return the Actinia process chain and the name of the processing result</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>process</strong> – The process description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_names, actinia_process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.filter_daterange_process">
+<span id="openeo-grass-gis-driver-actinia-processing-filter-daterange-process-module"></span><h2>openeo_grass_gis_driver.actinia_processing.filter_daterange_process module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.filter_daterange_process" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.filter_daterange_process.create__process_chain_entry">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.filter_daterange_process.</code><code class="descname">create__process_chain_entry</code><span class="sig-paren">(</span><em>input_name</em>, <em>start_time</em>, <em>end_time</em>, <em>output_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/filter_daterange_process.html#create__process_chain_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.filter_daterange_process.create__process_chain_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Actinia command of the process chain that uses t.rast.extract to create a subset of a strds</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>strds_name</strong> – The name of the strds</li>
+<li><strong>start_time</strong> – </li>
+<li><strong>end_time</strong> – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Actinia process chain description</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.filter_daterange_process.create_process_description">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.filter_daterange_process.</code><code class="descname">create_process_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/filter_daterange_process.html#create_process_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.filter_daterange_process.create_process_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.filter_daterange_process.get_process_list">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.filter_daterange_process.</code><code class="descname">get_process_list</code><span class="sig-paren">(</span><em>process</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/filter_daterange_process.html#get_process_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.filter_daterange_process.get_process_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the process description and return the Actinia process chain and the name of the processing result
+strds that was filtered by start and end date</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>process</strong> – The process description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_names, actinia_process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.get_data_process">
+<span id="openeo-grass-gis-driver-actinia-processing-get-data-process-module"></span><h2>openeo_grass_gis_driver.actinia_processing.get_data_process module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.get_data_process" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.get_data_process.create_process_chain_entry">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.get_data_process.</code><code class="descname">create_process_chain_entry</code><span class="sig-paren">(</span><em>input_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/get_data_process.html#create_process_chain_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.get_data_process.create_process_chain_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Actinia process description that uses t.rast.series to create the minimum
+value of the time series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input_time_series</strong> – The input time series name</li>
+<li><strong>output_map</strong> – The name of the output map</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Actinia process chain description</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.get_data_process.create_process_description">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.get_data_process.</code><code class="descname">create_process_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/get_data_process.html#create_process_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.get_data_process.create_process_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.get_data_process.get_process_list">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.get_data_process.</code><code class="descname">get_process_list</code><span class="sig-paren">(</span><em>process</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/get_data_process.html#get_process_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.get_data_process.get_process_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the process description and return the Actinia process chain and the name of the processing result</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>process</strong> – The process description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_names, actinia_process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.ndvi_2_process">
+<span id="openeo-grass-gis-driver-actinia-processing-ndvi-2-process-module"></span><h2>openeo_grass_gis_driver.actinia_processing.ndvi_2_process module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.ndvi_2_process" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.ndvi_2_process.create_process_chain_entry">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.ndvi_2_process.</code><code class="descname">create_process_chain_entry</code><span class="sig-paren">(</span><em>nir_time_series</em>, <em>red_time_series</em>, <em>output_time_series</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/ndvi_2_process.html#create_process_chain_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.ndvi_2_process.create_process_chain_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Actinia process description that uses t.rast.series to create the minimum
+value of the time series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nir_time_series</strong> – The NIR band time series name</li>
+<li><strong>red_time_series</strong> – The RED band time series name</li>
+<li><strong>output_time_series</strong> – The name of the output time series</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of Actinia process chain descriptions</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.ndvi_2_process.create_process_description">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.ndvi_2_process.</code><code class="descname">create_process_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/ndvi_2_process.html#create_process_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.ndvi_2_process.create_process_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.ndvi_2_process.get_process_list">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.ndvi_2_process.</code><code class="descname">get_process_list</code><span class="sig-paren">(</span><em>process</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/ndvi_2_process.html#get_process_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.ndvi_2_process.get_process_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the process description and return the Actinia process chain and the name of the processing result</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – The process description arguments</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_names, actinia_process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.ndvi_process">
+<span id="openeo-grass-gis-driver-actinia-processing-ndvi-process-module"></span><h2>openeo_grass_gis_driver.actinia_processing.ndvi_process module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.ndvi_process" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.ndvi_process.create_process_chain_entry">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.ndvi_process.</code><code class="descname">create_process_chain_entry</code><span class="sig-paren">(</span><em>nir_time_series</em>, <em>red_time_series</em>, <em>output_time_series</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/ndvi_process.html#create_process_chain_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.ndvi_process.create_process_chain_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Actinia process description that uses t.rast.series to create the minimum
+value of the time series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>nir_time_series</strong> – The NIR band time series name</li>
+<li><strong>red_time_series</strong> – The RED band time series name</li>
+<li><strong>output_time_series</strong> – The name of the output time series</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of Actinia process chain descriptions</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.ndvi_process.create_process_description">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.ndvi_process.</code><code class="descname">create_process_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/ndvi_process.html#create_process_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.ndvi_process.create_process_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.ndvi_process.get_process_list">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.ndvi_process.</code><code class="descname">get_process_list</code><span class="sig-paren">(</span><em>process</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/ndvi_process.html#get_process_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.ndvi_process.get_process_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the process description and return the Actinia process chain and the name of the processing result</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – The process description arguments</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_names, actinia_process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.raster_exporter">
+<span id="openeo-grass-gis-driver-actinia-processing-raster-exporter-module"></span><h2>openeo_grass_gis_driver.actinia_processing.raster_exporter module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.raster_exporter" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.raster_exporter.create_process_chain_entry">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.raster_exporter.</code><code class="descname">create_process_chain_entry</code><span class="sig-paren">(</span><em>input_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/raster_exporter.html#create_process_chain_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.raster_exporter.create_process_chain_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Actinia command of the process chain that computes the regional statistics based on a
+strds and a polygon.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_name</strong> – The name of the raster layer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A Actinia process chain description</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.raster_exporter.create_process_description">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.raster_exporter.</code><code class="descname">create_process_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/raster_exporter.html#create_process_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.raster_exporter.create_process_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.raster_exporter.get_process_list">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.raster_exporter.</code><code class="descname">get_process_list</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/raster_exporter.html#get_process_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.raster_exporter.get_process_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the process description and return the Actinia process chain and the name of the processing result layer
+which is a single raster layer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – The process description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_names, actinia_process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.reduce_time_process">
+<span id="openeo-grass-gis-driver-actinia-processing-reduce-time-process-module"></span><h2>openeo_grass_gis_driver.actinia_processing.reduce_time_process module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.reduce_time_process" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.reduce_time_process.create_process_chain_entry">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.reduce_time_process.</code><code class="descname">create_process_chain_entry</code><span class="sig-paren">(</span><em>input_name</em>, <em>method</em>, <em>output_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/reduce_time_process.html#create_process_chain_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.reduce_time_process.create_process_chain_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Actinia process description that uses t.rast.series to reduce a time series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input_time_series</strong> – The input time series name</li>
+<li><strong>method</strong> – The method for time reduction</li>
+<li><strong>output_map</strong> – The name of the output map</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Actinia process chain description</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.reduce_time_process.create_process_description">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.reduce_time_process.</code><code class="descname">create_process_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/reduce_time_process.html#create_process_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.reduce_time_process.create_process_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.reduce_time_process.get_process_list">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.reduce_time_process.</code><code class="descname">get_process_list</code><span class="sig-paren">(</span><em>process</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/reduce_time_process.html#get_process_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.reduce_time_process.get_process_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the process description and return the Actinia process chain
+and the name of the processing result layer
+which is a single raster layer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – The process description arguments</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_names, actinia_process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.udf_reduce_time">
+<span id="openeo-grass-gis-driver-actinia-processing-udf-reduce-time-module"></span><h2>openeo_grass_gis_driver.actinia_processing.udf_reduce_time module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.udf_reduce_time" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.udf_reduce_time.create_process_chain_entry">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.udf_reduce_time.</code><code class="descname">create_process_chain_entry</code><span class="sig-paren">(</span><em>input_name</em>, <em>python_file_url</em>, <em>output_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/udf_reduce_time.html#create_process_chain_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.udf_reduce_time.create_process_chain_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Actinia command of the process chain that uses g.region to create a valid computational region
+for the provide input strds</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>strds_name</strong> – The name of the strds</li>
+<li><strong>python_file_url</strong> – The URL to the python file that defines the UDF</li>
+<li><strong>output_name</strong> – The name of the output raster layer</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Actinia process chain description</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.udf_reduce_time.get_process_list">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.udf_reduce_time.</code><code class="descname">get_process_list</code><span class="sig-paren">(</span><em>args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/udf_reduce_time.html#get_process_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.udf_reduce_time.get_process_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the process description and return the Actinia process chain and the name of the processing result layer
+which is a single raster layer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – The process description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_names, actinia_process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing.zonal_statistics">
+<span id="openeo-grass-gis-driver-actinia-processing-zonal-statistics-module"></span><h2>openeo_grass_gis_driver.actinia_processing.zonal_statistics module<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing.zonal_statistics" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.zonal_statistics.create_process_chain_entry">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.zonal_statistics.</code><code class="descname">create_process_chain_entry</code><span class="sig-paren">(</span><em>input_name</em>, <em>polygons</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/zonal_statistics.html#create_process_chain_entry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.zonal_statistics.create_process_chain_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Actinia command of the process chain that computes the regional statistics based on a
+strds and a polygon.</p>
+<p>The computational region will be set to the vector map, the previous region will be saved and after processing
+restored. A mask will be set that uses the vector file as input. This mask will be removed in the end.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>input_name</strong> – The name of the strds</li>
+<li><strong>polygons</strong> – The URL to the vector file that defines the regions of interest</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Actinia process chain description</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.zonal_statistics.create_process_description">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.zonal_statistics.</code><code class="descname">create_process_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/zonal_statistics.html#create_process_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.zonal_statistics.create_process_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.actinia_processing.zonal_statistics.get_process_list">
+<code class="descclassname">openeo_grass_gis_driver.actinia_processing.zonal_statistics.</code><code class="descname">get_process_list</code><span class="sig-paren">(</span><em>process</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/actinia_processing/zonal_statistics.html#get_process_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.actinia_processing.zonal_statistics.get_process_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the process description and return the Actinia process chain and the name of the processing result layer
+which is a single raster layer</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>process</strong> – The process description</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">(output_names, actinia_process_list)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.actinia_processing">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-openeo_grass_gis_driver.actinia_processing" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="openeo_grass_gis_driver.utils.html" title="openeo_grass_gis_driver.utils package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="openeo_grass_gis_driver.html" title="openeo_grass_gis_driver package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >openeo_grass_gis_driver</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="openeo_grass_gis_driver.html" >openeo_grass_gis_driver package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Soeren Gebbert.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

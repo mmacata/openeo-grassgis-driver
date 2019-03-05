@@ -1,0 +1,947 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>openeo_grass_gis_driver package &#8212; openeo_grass_gis_driver  documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="openeo_grass_gis_driver.actinia_processing package" href="openeo_grass_gis_driver.actinia_processing.html" />
+    <link rel="prev" title="openeo_grass_gis_driver" href="modules.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="openeo_grass_gis_driver.actinia_processing.html" title="openeo_grass_gis_driver.actinia_processing package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="openeo_grass_gis_driver"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" accesskey="U">openeo_grass_gis_driver</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">openeo_grass_gis_driver package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.app">openeo_grass_gis_driver.app module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.authentication">openeo_grass_gis_driver.authentication module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.capabilities">openeo_grass_gis_driver.capabilities module</a></li>
+<li><a class="reference internal" href="#openeo-grass-gis-driver-collection-information-module">openeo_grass_gis_driver.collection_information module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.collection_schemas">openeo_grass_gis_driver.collection_schemas module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.collections">openeo_grass_gis_driver.collections module</a></li>
+<li><a class="reference internal" href="#openeo-grass-gis-driver-definitions-module">openeo_grass_gis_driver.definitions module</a></li>
+<li><a class="reference internal" href="#openeo-grass-gis-driver-endpoints-module">openeo_grass_gis_driver.endpoints module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.error_schemas">openeo_grass_gis_driver.error_schemas module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.job_db">openeo_grass_gis_driver.job_db module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.job_schemas">openeo_grass_gis_driver.job_schemas module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.jobs">openeo_grass_gis_driver.jobs module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.jobs_job_id">openeo_grass_gis_driver.jobs_job_id module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.jobs_job_id_results">openeo_grass_gis_driver.jobs_job_id_results module</a></li>
+<li><a class="reference internal" href="#openeo-grass-gis-driver-main-module">openeo_grass_gis_driver.main module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.preview">openeo_grass_gis_driver.preview module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.process_graph_db">openeo_grass_gis_driver.process_graph_db module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.process_graph_schemas">openeo_grass_gis_driver.process_graph_schemas module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.process_graph_validation">openeo_grass_gis_driver.process_graph_validation module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.process_graphs">openeo_grass_gis_driver.process_graphs module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.process_graphs_id">openeo_grass_gis_driver.process_graphs_id module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.process_schemas">openeo_grass_gis_driver.process_schemas module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.processes">openeo_grass_gis_driver.processes module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.processes_process_id">openeo_grass_gis_driver.processes_process_id module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.schema_base">openeo_grass_gis_driver.schema_base module</a></li>
+<li><a class="reference internal" href="#openeo-grass-gis-driver-test-base-module">openeo_grass_gis_driver.test_base module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.udf">openeo_grass_gis_driver.udf module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver.udf_lang_udf_type">openeo_grass_gis_driver.udf_lang_udf_type module</a></li>
+<li><a class="reference internal" href="#module-openeo_grass_gis_driver">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="previous chapter">openeo_grass_gis_driver</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="openeo_grass_gis_driver.actinia_processing.html"
+                        title="next chapter">openeo_grass_gis_driver.actinia_processing package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/openeo_grass_gis_driver.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="openeo-grass-gis-driver-package">
+<h1>openeo_grass_gis_driver package<a class="headerlink" href="#openeo-grass-gis-driver-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html">openeo_grass_gis_driver.actinia_processing package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.actinia_interface">openeo_grass_gis_driver.actinia_processing.actinia_interface module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.actinia_job_db">openeo_grass_gis_driver.actinia_processing.actinia_job_db module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.base">openeo_grass_gis_driver.actinia_processing.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.config">openeo_grass_gis_driver.actinia_processing.config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.filter_bbox_process">openeo_grass_gis_driver.actinia_processing.filter_bbox_process module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.filter_daterange_process">openeo_grass_gis_driver.actinia_processing.filter_daterange_process module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.get_data_process">openeo_grass_gis_driver.actinia_processing.get_data_process module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.ndvi_2_process">openeo_grass_gis_driver.actinia_processing.ndvi_2_process module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.ndvi_process">openeo_grass_gis_driver.actinia_processing.ndvi_process module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.raster_exporter">openeo_grass_gis_driver.actinia_processing.raster_exporter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.reduce_time_process">openeo_grass_gis_driver.actinia_processing.reduce_time_process module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.udf_reduce_time">openeo_grass_gis_driver.actinia_processing.udf_reduce_time module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing.zonal_statistics">openeo_grass_gis_driver.actinia_processing.zonal_statistics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.actinia_processing.html#module-openeo_grass_gis_driver.actinia_processing">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="openeo_grass_gis_driver.utils.html">openeo_grass_gis_driver.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.utils.html#module-openeo_grass_gis_driver.utils.process_graph_examples_v03">openeo_grass_gis_driver.utils.process_graph_examples_v03 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.utils.html#module-openeo_grass_gis_driver.utils.process_graph_examples_v04">openeo_grass_gis_driver.utils.process_graph_examples_v04 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openeo_grass_gis_driver.utils.html#module-openeo_grass_gis_driver.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.app">
+<span id="openeo-grass-gis-driver-app-module"></span><h2>openeo_grass_gis_driver.app module<a class="headerlink" href="#module-openeo_grass_gis_driver.app" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.authentication">
+<span id="openeo-grass-gis-driver-authentication-module"></span><h2>openeo_grass_gis_driver.authentication module<a class="headerlink" href="#module-openeo_grass_gis_driver.authentication" title="Permalink to this headline">¶</a></h2>
+<p>Copyright (c) 2019-present mundialis GmbH &amp; Co. KG</p>
+<p>Licensed under the Apache License, Version 2.0 (the “License”);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
+<blockquote>
+<div><a class="reference external" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></div></blockquote>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an “AS IS” BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+<p>Basic authentication for using the class Resource from flask_restful.</p>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.authentication.ResourceBase">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.authentication.</code><code class="descname">ResourceBase</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/authentication.html#ResourceBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flask_restful.Resource</span></code></p>
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.authentication.ResourceBase.decorators">
+<code class="descname">decorators</code><em class="property"> = [&lt;function requires_authorization&gt;]</em><a class="headerlink" href="#openeo_grass_gis_driver.authentication.ResourceBase.decorators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.authentication.authenticate">
+<code class="descclassname">openeo_grass_gis_driver.authentication.</code><code class="descname">authenticate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/authentication.html#authenticate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.authentication.authenticate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.authentication.ok_user_and_password">
+<code class="descclassname">openeo_grass_gis_driver.authentication.</code><code class="descname">ok_user_and_password</code><span class="sig-paren">(</span><em>username</em>, <em>password</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/authentication.html#ok_user_and_password"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.authentication.ok_user_and_password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.authentication.requires_authorization">
+<code class="descclassname">openeo_grass_gis_driver.authentication.</code><code class="descname">requires_authorization</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/authentication.html#requires_authorization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.authentication.requires_authorization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.capabilities">
+<span id="openeo-grass-gis-driver-capabilities-module"></span><h2>openeo_grass_gis_driver.capabilities module<a class="headerlink" href="#module-openeo_grass_gis_driver.capabilities" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.capabilities.Capabilities">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.capabilities.</code><code class="descname">Capabilities</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/capabilities.html#Capabilities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.capabilities.Capabilities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.capabilities.Capabilities.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/capabilities.html#Capabilities.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.capabilities.Capabilities.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.capabilities.Capabilities.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#openeo_grass_gis_driver.capabilities.Capabilities.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.capabilities.ServiceTypes">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.capabilities.</code><code class="descname">ServiceTypes</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/capabilities.html#ServiceTypes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.capabilities.ServiceTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.capabilities.ServiceTypes.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/capabilities.html#ServiceTypes.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.capabilities.ServiceTypes.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.capabilities.ServiceTypes.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#openeo_grass_gis_driver.capabilities.ServiceTypes.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="openeo-grass-gis-driver-collection-information-module">
+<h2>openeo_grass_gis_driver.collection_information module<a class="headerlink" href="#openeo-grass-gis-driver-collection-information-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.collection_schemas">
+<span id="openeo-grass-gis-driver-collection-schemas-module"></span><h2>openeo_grass_gis_driver.collection_schemas module<a class="headerlink" href="#module-openeo_grass_gis_driver.collection_schemas" title="Permalink to this headline">¶</a></h2>
+<p>This file includes all required openEO response schemas</p>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.collection_schemas.Collection">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.collection_schemas.</code><code class="descname">Collection</code><span class="sig-paren">(</span><em>collections: List[openeo_grass_gis_driver.collection_schemas.CollectionEntry], links: openeo_grass_gis_driver.schema_base.EoLinks = &lt;openeo_grass_gis_driver.schema_base.EoLinks object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/collection_schemas.html#Collection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.collection_schemas.Collection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>A collection of data description entries</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.collection_schemas.CollectionEntry">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.collection_schemas.</code><code class="descname">CollectionEntry</code><span class="sig-paren">(</span><em>name: str</em>, <em>title=None</em>, <em>description: str = None</em>, <em>license: str = None</em>, <em>links: openeo_grass_gis_driver.schema_base.EoLinks = &lt;openeo_grass_gis_driver.schema_base.EoLinks object&gt;</em>, <em>extent: openeo_grass_gis_driver.collection_schemas.Extent = &lt;openeo_grass_gis_driver.collection_schemas.Extent object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/collection_schemas.html#CollectionEntry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.collection_schemas.CollectionEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<dl class="docutils">
+<dt>name:</dt>
+<dd>required
+string (collection_name) ^[<a href="#id1"><span class="problematic" id="id2">A-Za-z0-9_</span></a>-.~/]+$
+Unique identifier for EO collections. MUST match the specified pattern.</dd>
+<dt>title:</dt>
+<dd>string (collection_title)
+A short descriptive one-line title for the collection.</dd>
+<dt>description:</dt>
+<dd>required
+string (collection_description)
+Detailed multi-line description to fully explain the collection.
+CommonMark 0.28 syntax MAY be used for rich text representation.</dd>
+<dt>license:</dt>
+<dd>required
+string (license)
+Collection’s license(s) as a SPDX License identifier, SPDX expression,
+or the string proprietary if the license is not on the SPDX license list.
+Proprietary licensed data SHOULD add a link to the license text with the l
+icense relation in the links section (not as a value of this fields).</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.collection_schemas.CollectionInformation">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.collection_schemas.</code><code class="descname">CollectionInformation</code><span class="sig-paren">(</span><em>keywords: Optional[List[str]] = None</em>, <em>version: str = None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/collection_schemas.html#CollectionInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.collection_schemas.CollectionInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.collection_schemas.CollectionEntry" title="openeo_grass_gis_driver.collection_schemas.CollectionEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.collection_schemas.CollectionEntry</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.collection_schemas.Extent">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.collection_schemas.</code><code class="descname">Extent</code><span class="sig-paren">(</span><em>spatial: Optional[Tuple[float</em>, <em>float</em>, <em>float</em>, <em>float]] = None</em>, <em>temporal: Optional[Tuple[str</em>, <em>Optional[str]]] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/collection_schemas.html#Extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.collection_schemas.Extent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<dl class="docutils">
+<dt>spatial:</dt>
+<dd><p class="first">Array of number
+The potential spatial extent covered by the collection.
+The bounding box is provided as four or six numbers, depending on whether
+the coordinate reference system includes a vertical axis (height or depth):</p>
+<p class="last">West (lower left corner, coordinate axis 1)
+South (lower left corner, coordinate axis 2)
+Base (optional, lower left corner, coordinate axis 3)
+East (upper right corner, coordinate axis 1)
+North (upper right corner, coordinate axis 2)
+Height (optional, upper right corner, coordinate axis 3)
+The coordinate reference system of the values is WGS84 longitude/latitude.</p>
+</dd>
+<dt>temporal:</dt>
+<dd>Array of string &lt;date-time&gt;
+Potential temporal extent covered by the collection.
+The temporal extent specified by a start and an end time,
+each formatted as a RFC 3339 date-time. Open date ranges are
+supported and can be specified by setting one of the times to null.
+Setting both entries to null is not allowed. Only the Gregorian calendar is supported.</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.collections">
+<span id="openeo-grass-gis-driver-collections-module"></span><h2>openeo_grass_gis_driver.collections module<a class="headerlink" href="#module-openeo_grass_gis_driver.collections" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.collections.Collections">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.collections.</code><code class="descname">Collections</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/collections.html#Collections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.collections.Collections" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.collections.Collections.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/collections.html#Collections.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.collections.Collections.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.collections.Collections.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#openeo_grass_gis_driver.collections.Collections.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="openeo-grass-gis-driver-definitions-module">
+<h2>openeo_grass_gis_driver.definitions module<a class="headerlink" href="#openeo-grass-gis-driver-definitions-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="openeo-grass-gis-driver-endpoints-module">
+<h2>openeo_grass_gis_driver.endpoints module<a class="headerlink" href="#openeo-grass-gis-driver-endpoints-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.error_schemas">
+<span id="openeo-grass-gis-driver-error-schemas-module"></span><h2>openeo_grass_gis_driver.error_schemas module<a class="headerlink" href="#module-openeo_grass_gis_driver.error_schemas" title="Permalink to this headline">¶</a></h2>
+<p>This file includes all required openEO response schemas</p>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.error_schemas.ErrorSchema">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.error_schemas.</code><code class="descname">ErrorSchema</code><span class="sig-paren">(</span><em>id: str</em>, <em>code: int</em>, <em>message: str</em>, <em>links: List[Optional[openeo_grass_gis_driver.schema_base.EoLinks]] = []</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/error_schemas.html#ErrorSchema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.error_schemas.ErrorSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>This is the error response schema</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.job_db">
+<span id="openeo-grass-gis-driver-job-db-module"></span><h2>openeo_grass_gis_driver.job_db module<a class="headerlink" href="#module-openeo_grass_gis_driver.job_db" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.job_db.JobDB">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.job_db.</code><code class="descname">JobDB</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/job_db.html#JobDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.job_db.JobDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sqlitedict.SqliteDict</span></code></p>
+<p>This is the storage of all jobs that where committed</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.job_schemas">
+<span id="openeo-grass-gis-driver-job-schemas-module"></span><h2>openeo_grass_gis_driver.job_schemas module<a class="headerlink" href="#module-openeo_grass_gis_driver.job_schemas" title="Permalink to this headline">¶</a></h2>
+<p>This file includes all required openEO response schemas</p>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.job_schemas.JobInformation">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.job_schemas.</code><code class="descname">JobInformation</code><span class="sig-paren">(</span><em>job_id: str, title: str, description: str, status: str, process_graph: {}, output: Optional[openeo_grass_gis_driver.job_schemas.OutputFormat], submitted: str, updated: Optional[str], plan: str = 'free', cost: float = 0.0, budget: float = 0.0, links: Optional[openeo_grass_gis_driver.schema_base.EoLinks] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/job_schemas.html#JobInformation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.job_schemas.JobInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>Information about a job</p>
+<p><a class="reference external" href="https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths">https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths</a>/~1jobs~1{job_id}/get</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.job_schemas.JobList">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.job_schemas.</code><code class="descname">JobList</code><span class="sig-paren">(</span><em>jobs: List[openeo_grass_gis_driver.job_schemas.JobInformation], links: Optional[openeo_grass_gis_driver.schema_base.EoLinks] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/job_schemas.html#JobList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.job_schemas.JobList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>A collection of job description entries</p>
+<p><a class="reference external" href="https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths/~1jobs/get">https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths/~1jobs/get</a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.job_schemas.OutputFormat">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.job_schemas.</code><code class="descname">OutputFormat</code><span class="sig-paren">(</span><em>format: str, parameters: Dict[str, str]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/job_schemas.html#OutputFormat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.job_schemas.OutputFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>Information about the output format</p>
+<p><a class="reference external" href="https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths">https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths</a>/~1jobs~1{job_id}/get</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.jobs">
+<span id="openeo-grass-gis-driver-jobs-module"></span><h2>openeo_grass_gis_driver.jobs module<a class="headerlink" href="#module-openeo_grass_gis_driver.jobs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.jobs.Jobs">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.jobs.</code><code class="descname">Jobs</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs.html#Jobs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs.Jobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<p>The /jobs endpoint implementation</p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs.Jobs.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs.html#Jobs.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs.Jobs.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear the job database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs.Jobs.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs.html#Jobs.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs.Jobs.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all jobs in the job database</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.jobs.Jobs.methods">
+<code class="descname">methods</code><em class="property"> = {'DELETE', 'GET', 'POST'}</em><a class="headerlink" href="#openeo_grass_gis_driver.jobs.Jobs.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs.Jobs.post">
+<code class="descname">post</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs.html#Jobs.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs.Jobs.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit a new job to the job database</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.jobs.OutputFormats">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.jobs.</code><code class="descname">OutputFormats</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs.html#OutputFormats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs.OutputFormats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs.OutputFormats.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs.html#OutputFormats.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs.OutputFormats.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.jobs.OutputFormats.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#openeo_grass_gis_driver.jobs.OutputFormats.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.jobs.check_job">
+<code class="descclassname">openeo_grass_gis_driver.jobs.</code><code class="descname">check_job</code><span class="sig-paren">(</span><em>job</em>, <em>job_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs.html#check_job"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs.check_job" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.jobs_job_id">
+<span id="openeo-grass-gis-driver-jobs-job-id-module"></span><h2>openeo_grass_gis_driver.jobs_job_id module<a class="headerlink" href="#module-openeo_grass_gis_driver.jobs_job_id" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.jobs_job_id.JobsJobId">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.jobs_job_id.</code><code class="descname">JobsJobId</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs_job_id.html#JobsJobId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id.JobsJobId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs_job_id.JobsJobId.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><em>job_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs_job_id.html#JobsJobId.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id.JobsJobId.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a single job</p>
+<p><a class="reference external" href="https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths">https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths</a>/~1jobs~1{job_id}/delete</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs_job_id.JobsJobId.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>job_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs_job_id.html#JobsJobId.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id.JobsJobId.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return information about a single job</p>
+<p><a class="reference external" href="https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths">https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths</a>/~1jobs~1{job_id}/get</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.jobs_job_id.JobsJobId.methods">
+<code class="descname">methods</code><em class="property"> = {'DELETE', 'GET', 'PATCH'}</em><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id.JobsJobId.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs_job_id.JobsJobId.patch">
+<code class="descname">patch</code><span class="sig-paren">(</span><em>job_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs_job_id.html#JobsJobId.patch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id.JobsJobId.patch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.jobs_job_id_results">
+<span id="openeo-grass-gis-driver-jobs-job-id-results-module"></span><h2>openeo_grass_gis_driver.jobs_job_id_results module<a class="headerlink" href="#module-openeo_grass_gis_driver.jobs_job_id_results" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.jobs_job_id_results.</code><code class="descname">JobsJobIdResults</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs_job_id_results.html#JobsJobIdResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><em>job_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs_job_id_results.html#JobsJobIdResults.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancel a running job</p>
+<p><a class="reference external" href="https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths">https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths</a>/~1jobs~1{job_id}~1results/delete</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>job_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs_job_id_results.html#JobsJobIdResults.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return information about a single job</p>
+<p><a class="reference external" href="https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths">https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths</a>/~1jobs~1{job_id}/get</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults.methods">
+<code class="descname">methods</code><em class="property"> = {'DELETE', 'GET', 'POST'}</em><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults.post">
+<code class="descname">post</code><span class="sig-paren">(</span><em>job_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs_job_id_results.html#JobsJobIdResults.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start a processing job in the actinia backend</p>
+<p><a class="reference external" href="https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths">https://open-eo.github.io/openeo-api/v/0.3.0/apireference/#tag/Job-Management/paths</a>/~1jobs~1{job_id}~1results/post</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults.send_actinia_processing_request">
+<code class="descname">send_actinia_processing_request</code><span class="sig-paren">(</span><em>job: openeo_grass_gis_driver.job_schemas.JobInformation</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/jobs_job_id_results.html#JobsJobIdResults.send_actinia_processing_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.jobs_job_id_results.JobsJobIdResults.send_actinia_processing_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="openeo-grass-gis-driver-main-module">
+<h2>openeo_grass_gis_driver.main module<a class="headerlink" href="#openeo-grass-gis-driver-main-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.preview">
+<span id="openeo-grass-gis-driver-preview-module"></span><h2>openeo_grass_gis_driver.preview module<a class="headerlink" href="#module-openeo_grass_gis_driver.preview" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.preview.Preview">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.preview.</code><code class="descname">Preview</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/preview.html#Preview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.preview.Preview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.preview.Preview.methods">
+<code class="descname">methods</code><em class="property"> = {'POST'}</em><a class="headerlink" href="#openeo_grass_gis_driver.preview.Preview.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.preview.Preview.post">
+<code class="descname">post</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/preview.html#Preview.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.preview.Preview.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the job in an ephemeral mapset synchronously for 10 seconds. After 10 seconds the running job
+will be killed on the actinia server and the response will be an termination report.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.preview.Preview.wait_until_finished">
+<code class="descname">wait_until_finished</code><span class="sig-paren">(</span><em>response</em>, <em>max_time: int = 10</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/preview.html#Preview.wait_until_finished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.preview.Preview.wait_until_finished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Poll the status of a resource and assert its finished HTTP status</p>
+<p>The response will be checked if the resource was accepted. Hence it must always be HTTP 200 status.</p>
+<p>The status URL from the response is then polled until status: finished, error or terminated.
+The result of the poll can be checked against its HTTP status and its GRaaS status message.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>response</strong> – The accept response</li>
+<li><strong>max_time</strong> (<a class="reference external" href="https://docs.python.org/3.6/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – The maximum time to wait, until the job gets killed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns: response</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.process_graph_db">
+<span id="openeo-grass-gis-driver-process-graph-db-module"></span><h2>openeo_grass_gis_driver.process_graph_db module<a class="headerlink" href="#module-openeo_grass_gis_driver.process_graph_db" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_graph_db.GraphDB">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_graph_db.</code><code class="descname">GraphDB</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graph_db.html#GraphDB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graph_db.GraphDB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sqlitedict.SqliteDict</span></code></p>
+<p>This is the storage of the process graphs that were commited for processing</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.process_graph_schemas">
+<span id="openeo-grass-gis-driver-process-graph-schemas-module"></span><h2>openeo_grass_gis_driver.process_graph_schemas module<a class="headerlink" href="#module-openeo_grass_gis_driver.process_graph_schemas" title="Permalink to this headline">¶</a></h2>
+<p>This file includes all required openEO response schemas</p>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_graph_schemas.ProcessGraph">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_graph_schemas.</code><code class="descname">ProcessGraph</code><span class="sig-paren">(</span><em>title: str</em>, <em>description: str</em>, <em>process_graph: openeo_grass_gis_driver.process_graph_schemas.ProcessGraphDefinition</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graph_schemas.html#ProcessGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graph_schemas.ProcessGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>This is the definition of a process graph with title and description</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_graph_schemas.ProcessGraphDefinition">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_graph_schemas.</code><code class="descname">ProcessGraphDefinition</code><span class="sig-paren">(</span><em>process_id: str</em>, <em>process_description: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graph_schemas.html#ProcessGraphDefinition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graph_schemas.ProcessGraphDefinition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>This is the definition of a single process graph</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_graph_schemas.ProcessGraphList">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_graph_schemas.</code><code class="descname">ProcessGraphList</code><span class="sig-paren">(</span><em>process_graphs: List[openeo_grass_gis_driver.process_graph_schemas.ProcessGraphListEntry], links: Optional[openeo_grass_gis_driver.schema_base.EoLinks] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graph_schemas.html#ProcessGraphList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graph_schemas.ProcessGraphList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>A list of process graph definitions</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_graph_schemas.ProcessGraphListEntry">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_graph_schemas.</code><code class="descname">ProcessGraphListEntry</code><span class="sig-paren">(</span><em>title: str</em>, <em>description: str</em>, <em>process_graph_id: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graph_schemas.html#ProcessGraphListEntry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graph_schemas.ProcessGraphListEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>An entry in the process graph list</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.process_graph_validation">
+<span id="openeo-grass-gis-driver-process-graph-validation-module"></span><h2>openeo_grass_gis_driver.process_graph_validation module<a class="headerlink" href="#module-openeo_grass_gis_driver.process_graph_validation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_graph_validation.GraphValidation">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_graph_validation.</code><code class="descname">GraphValidation</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graph_validation.html#GraphValidation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graph_validation.GraphValidation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.process_graph_validation.GraphValidation.methods">
+<code class="descname">methods</code><em class="property"> = {'POST'}</em><a class="headerlink" href="#openeo_grass_gis_driver.process_graph_validation.GraphValidation.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.process_graph_validation.GraphValidation.post">
+<code class="descname">post</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graph_validation.html#GraphValidation.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graph_validation.GraphValidation.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the job in an ephemeral mapset</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.process_graphs">
+<span id="openeo-grass-gis-driver-process-graphs-module"></span><h2>openeo_grass_gis_driver.process_graphs module<a class="headerlink" href="#module-openeo_grass_gis_driver.process_graphs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_graphs.ProcessGraphs">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_graphs.</code><code class="descname">ProcessGraphs</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graphs.html#ProcessGraphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graphs.ProcessGraphs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<p>The /jobs endpoint implementation</p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.process_graphs.ProcessGraphs.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graphs.html#ProcessGraphs.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graphs.ProcessGraphs.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear the process graph database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.process_graphs.ProcessGraphs.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graphs.html#ProcessGraphs.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graphs.ProcessGraphs.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all jobs in the job database</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.process_graphs.ProcessGraphs.methods">
+<code class="descname">methods</code><em class="property"> = {'DELETE', 'GET', 'POST'}</em><a class="headerlink" href="#openeo_grass_gis_driver.process_graphs.ProcessGraphs.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.process_graphs.ProcessGraphs.post">
+<code class="descname">post</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graphs.html#ProcessGraphs.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graphs.ProcessGraphs.post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.process_graphs_id">
+<span id="openeo-grass-gis-driver-process-graphs-id-module"></span><h2>openeo_grass_gis_driver.process_graphs_id module<a class="headerlink" href="#module-openeo_grass_gis_driver.process_graphs_id" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_graphs_id.ProcessGraphId">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_graphs_id.</code><code class="descname">ProcessGraphId</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graphs_id.html#ProcessGraphId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graphs_id.ProcessGraphId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<p>The /jobs endpoint implementation</p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.process_graphs_id.ProcessGraphId.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><em>process_graph_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graphs_id.html#ProcessGraphId.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graphs_id.ProcessGraphId.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a single process graph from the database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.process_graphs_id.ProcessGraphId.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>process_graph_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graphs_id.html#ProcessGraphId.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graphs_id.ProcessGraphId.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all jobs in the job database</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.process_graphs_id.ProcessGraphId.methods">
+<code class="descname">methods</code><em class="property"> = {'DELETE', 'GET', 'PATCH'}</em><a class="headerlink" href="#openeo_grass_gis_driver.process_graphs_id.ProcessGraphId.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="openeo_grass_gis_driver.process_graphs_id.ProcessGraphId.patch">
+<code class="descname">patch</code><span class="sig-paren">(</span><em>process_graph_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_graphs_id.html#ProcessGraphId.patch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_graphs_id.ProcessGraphId.patch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.process_schemas">
+<span id="openeo-grass-gis-driver-process-schemas-module"></span><h2>openeo_grass_gis_driver.process_schemas module<a class="headerlink" href="#module-openeo_grass_gis_driver.process_schemas" title="Permalink to this headline">¶</a></h2>
+<p>This file includes all required openEO response schemas</p>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_schemas.DependentObject">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_schemas.</code><code class="descname">DependentObject</code><span class="sig-paren">(</span><em>parameter: str</em>, <em>description: str</em>, <em>ref_values: dict = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_schemas.html#DependentObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_schemas.DependentObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>This is the definition of a dependent object of a parameter</p>
+<dl class="docutils">
+<dt>description:</dt>
+<dd><p class="first">string (description) Nullable
+Detailed description to fully explain the entity.</p>
+<p class="last">CommonMark 0.28 syntax MAY be used for rich text representation.</p>
+</dd>
+<dt>parameter:</dt>
+<dd>required
+string
+The name of the referenced parameter.</dd>
+<dt>ref_values:</dt>
+<dd>Array of any
+Embedded literal value that the referenced parameter MUST hold for this dependency to apply.</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_schemas.Parameter">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_schemas.</code><code class="descname">Parameter</code><span class="sig-paren">(</span><em>description: str</em>, <em>schema: dict</em>, <em>required: bool = False</em>, <em>dependencies: Optional[List[openeo_grass_gis_driver.process_schemas.DependentObject]] = None</em>, <em>depricated: bool = False</em>, <em>mime_type: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_schemas.html#Parameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_schemas.Parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>This is a single parameter of a process</p>
+<dl class="docutils">
+<dt>description:</dt>
+<dd><p class="first">required
+string (description) Nullable
+Detailed description to fully explain the entity.</p>
+<p class="last">CommonMark 0.28 syntax MAY be used for rich text representation.</p>
+</dd>
+<dt>required:</dt>
+<dd>boolean
+Default: false
+Determines whether this parameter is mandatory.</dd>
+<dt>deprecated:</dt>
+<dd>boolean
+Default: false
+Specifies that a parameter is deprecated and SHOULD be transitioned out of usage.</dd>
+<dt>mime_type:</dt>
+<dd>string
+The mime type that the parameter is formatted with.</dd>
+<dt>schema:</dt>
+<dd>required
+object (json_schema)
+A schema object according to the specification of JSON Schema draft-07.
+Additional values for format are defined centrally in the API documentation, e.g. bbox or crs.</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_schemas.ProcessDescription">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_schemas.</code><code class="descname">ProcessDescription</code><span class="sig-paren">(</span><em>name: str, description: str, parameters: Dict[str, openeo_grass_gis_driver.process_schemas.Parameter], returns: openeo_grass_gis_driver.process_schemas.ReturnValue, links: openeo_grass_gis_driver.schema_base.EoLinks = [], summary: Optional[str] = None, min_parameters: Optional[int] = None, deprecated: bool = False, exceptions: Optional[Dict[str, openeo_grass_gis_driver.process_schemas.ProcessException]] = None, examples: Optional[Dict] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_schemas.html#ProcessDescription"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_schemas.ProcessDescription" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_schemas.ProcessException">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_schemas.</code><code class="descname">ProcessException</code><span class="sig-paren">(</span><em>code: int</em>, <em>description: str</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_schemas.html#ProcessException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_schemas.ProcessException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<dl class="docutils">
+<dt>code:</dt>
+<dd>integer
+Code to identify the exception.</dd>
+<dt>description:</dt>
+<dd><p class="first">required
+string (description) Nullable
+Detailed description to fully explain the entity.</p>
+<p class="last">CommonMark 0.28 syntax MAY be used for rich text representation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.process_schemas.ReturnValue">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.process_schemas.</code><code class="descname">ReturnValue</code><span class="sig-paren">(</span><em>description: str</em>, <em>schema: dict</em>, <em>mime_type: Optional[str] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/process_schemas.html#ReturnValue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.process_schemas.ReturnValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<dl class="docutils">
+<dt>description:</dt>
+<dd><p class="first">required
+string (description) Nullable
+Detailed description to fully explain the entity.</p>
+<p class="last">CommonMark 0.28 syntax MAY be used for rich text representation.</p>
+</dd>
+<dt>mime_type:</dt>
+<dd>string
+The mime type that the returned data is formatted with.</dd>
+<dt>schema:</dt>
+<dd>required
+object (json_schema)
+A schema object according to the specification of JSON Schema draft-07.
+Additional values for format are defined centrally in the API documentation, e.g. bbox or crs.</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.processes">
+<span id="openeo-grass-gis-driver-processes-module"></span><h2>openeo_grass_gis_driver.processes module<a class="headerlink" href="#module-openeo_grass_gis_driver.processes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.processes.Processes">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.processes.</code><code class="descname">Processes</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/processes.html#Processes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.processes.Processes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.processes.Processes.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/processes.html#Processes.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.processes.Processes.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.processes.Processes.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#openeo_grass_gis_driver.processes.Processes.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.processes_process_id">
+<span id="openeo-grass-gis-driver-processes-process-id-module"></span><h2>openeo_grass_gis_driver.processes_process_id module<a class="headerlink" href="#module-openeo_grass_gis_driver.processes_process_id" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.processes_process_id.ProcessesProcessId">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.processes_process_id.</code><code class="descname">ProcessesProcessId</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/processes_process_id.html#ProcessesProcessId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.processes_process_id.ProcessesProcessId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.processes_process_id.ProcessesProcessId.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>process_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/processes_process_id.html#ProcessesProcessId.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.processes_process_id.ProcessesProcessId.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.processes_process_id.ProcessesProcessId.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#openeo_grass_gis_driver.processes_process_id.ProcessesProcessId.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.schema_base">
+<span id="openeo-grass-gis-driver-schema-base-module"></span><h2>openeo_grass_gis_driver.schema_base module<a class="headerlink" href="#module-openeo_grass_gis_driver.schema_base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.schema_base.EoLink">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.schema_base.</code><code class="descname">EoLink</code><span class="sig-paren">(</span><em>href: str</em>, <em>rel: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/schema_base.html#EoLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.schema_base.EoLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>link related to this collection.</p>
+<dl class="docutils">
+<dt>rel:</dt>
+<dd>string</dd>
+<dt>href:</dt>
+<dd>required
+string &lt;url&gt;
+The value MUST be a dereferenceable URL.</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.schema_base.EoLinks">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.schema_base.</code><code class="descname">EoLinks</code><span class="sig-paren">(</span><em>links: List[openeo_grass_gis_driver.schema_base.EoLink]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/schema_base.html#EoLinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.schema_base.EoLinks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="openeo_grass_gis_driver.schema_base.JsonableObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.schema_base.JsonableObject</span></code></a></p>
+<p>Additional links related to this collection.
+Could reference to other meta data formats
+with additional information or a preview image.</p>
+<p>links: A list of EoLink’s</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="openeo_grass_gis_driver.schema_base.JsonableObject">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.schema_base.</code><code class="descname">JsonableObject</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/schema_base.html#JsonableObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.schema_base.JsonableObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#object" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class is the base class for all openEO responses that serialises
+the response classes into JSON</p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.schema_base.JsonableObject.to_json">
+<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/schema_base.html#JsonableObject.to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.schema_base.JsonableObject.to_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="openeo_grass_gis_driver.schema_base.as_dict_without_nones">
+<code class="descclassname">openeo_grass_gis_driver.schema_base.</code><code class="descname">as_dict_without_nones</code><span class="sig-paren">(</span><em>o</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/schema_base.html#as_dict_without_nones"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.schema_base.as_dict_without_nones" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="openeo-grass-gis-driver-test-base-module">
+<h2>openeo_grass_gis_driver.test_base module<a class="headerlink" href="#openeo-grass-gis-driver-test-base-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.udf">
+<span id="openeo-grass-gis-driver-udf-module"></span><h2>openeo_grass_gis_driver.udf module<a class="headerlink" href="#module-openeo_grass_gis_driver.udf" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.udf.Udf">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.udf.</code><code class="descname">Udf</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/udf.html#Udf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.udf.Udf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.udf.Udf.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/udf.html#Udf.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.udf.Udf.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.udf.Udf.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#openeo_grass_gis_driver.udf.Udf.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver.udf_lang_udf_type">
+<span id="openeo-grass-gis-driver-udf-lang-udf-type-module"></span><h2>openeo_grass_gis_driver.udf_lang_udf_type module<a class="headerlink" href="#module-openeo_grass_gis_driver.udf_lang_udf_type" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="openeo_grass_gis_driver.udf_lang_udf_type.UdfType">
+<em class="property">class </em><code class="descclassname">openeo_grass_gis_driver.udf_lang_udf_type.</code><code class="descname">UdfType</code><a class="reference internal" href="../_modules/openeo_grass_gis_driver/udf_lang_udf_type.html#UdfType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.udf_lang_udf_type.UdfType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#openeo_grass_gis_driver.authentication.ResourceBase" title="openeo_grass_gis_driver.authentication.ResourceBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">openeo_grass_gis_driver.authentication.ResourceBase</span></code></a></p>
+<dl class="method">
+<dt id="openeo_grass_gis_driver.udf_lang_udf_type.UdfType.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>lang</em>, <em>udf_type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/openeo_grass_gis_driver/udf_lang_udf_type.html#UdfType.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#openeo_grass_gis_driver.udf_lang_udf_type.UdfType.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="openeo_grass_gis_driver.udf_lang_udf_type.UdfType.methods">
+<code class="descname">methods</code><em class="property"> = {'GET'}</em><a class="headerlink" href="#openeo_grass_gis_driver.udf_lang_udf_type.UdfType.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-openeo_grass_gis_driver">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-openeo_grass_gis_driver" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="openeo_grass_gis_driver.actinia_processing.html" title="openeo_grass_gis_driver.actinia_processing package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="openeo_grass_gis_driver"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">openeo_grass_gis_driver  documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >openeo_grass_gis_driver</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Soeren Gebbert.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

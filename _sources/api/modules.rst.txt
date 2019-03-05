@@ -1,7 +1,7 @@
-graas_openeo_core_wrapper
-=========================
+openeo_grass_gis_driver
+=======================
 
 .. toctree::
    :maxdepth: 4
 
-   graas_openeo_core_wrapper
+   openeo_grass_gis_driver
